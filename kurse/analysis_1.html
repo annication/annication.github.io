@@ -122,7 +122,12 @@
 
       <div id="aufgabenContent" class="max-h-[58vh] overflow-y-auto pr-2 space-y-4">
         <article class="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
-          <p class="mb-2 text-sm font-semibold text-pink-300">Aufgabe 1 · Grenzwerte</p>
+          <div class="mb-2 flex items-start justify-between gap-3">
+            <p class="text-sm font-semibold text-pink-300">Aufgabe 1 · Grenzwerte</p>
+            <a href="https://www.youtube.com/@annication" target="_blank" rel="noopener noreferrer" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-700 text-sm text-slate-300 hover:border-pink-400 hover:text-pink-300" aria-label="Passendes Video öffnen">
+              ▶
+            </a>
+          </div>
           <h3 class="text-lg font-bold">Finde den Grenzwert</h3>
           <p class="mt-2 text-slate-300">
             Untersuche die Folge aₙ = 1/n und bestimme ihren Grenzwert.
@@ -134,10 +139,21 @@
             <summary class="cursor-pointer text-sm font-semibold text-slate-200">Hinweis anzeigen</summary>
             <p class="mt-2 text-sm text-slate-300">Nutze die ε-Definition und wähle N groß genug.</p>
           </details>
+          <details class="mt-3 rounded-lg border border-slate-800 p-3">
+            <summary class="cursor-pointer text-sm font-semibold text-slate-200">Lösung anzeigen</summary>
+            <p class="mt-2 text-sm text-slate-300">
+              Die Folge 1/n konvergiert gegen 0. Für jedes ε &gt; 0 wähle N &gt; 1/ε. Dann gilt für alle n ≥ N: |1/n − 0| = 1/n ≤ 1/N &lt; ε.
+            </p>
+          </details>
         </article>
 
         <article class="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
-          <p class="mb-2 text-sm font-semibold text-pink-300">Aufgabe 2 · Beweis</p>
+          <div class="mb-2 flex items-start justify-between gap-3">
+            <p class="text-sm font-semibold text-pink-300">Aufgabe 2 · Beweis</p>
+            <a href="https://www.youtube.com/@annication" target="_blank" rel="noopener noreferrer" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-700 text-sm text-slate-300 hover:border-pink-400 hover:text-pink-300" aria-label="Passendes Video öffnen">
+              ▶
+            </a>
+          </div>
           <h3 class="text-lg font-bold">Zeige Eindeutigkeit des Grenzwerts</h3>
           <p class="mt-2 text-slate-300">
             Beweise, dass eine konvergente Folge höchstens einen Grenzwert besitzt.
@@ -146,17 +162,35 @@
             Hilfreich: <a href="#satz-eindeutigkeit" class="text-pink-300 hover:text-pink-200">Satz zur Eindeutigkeit</a>,
             <a href="#beweis-eindeutigkeit" class="text-pink-300 hover:text-pink-200"> Beweisidee</a>
           </p>
+          <details class="mt-4 rounded-lg border border-slate-800 p-3">
+            <summary class="cursor-pointer text-sm font-semibold text-slate-200">Lösung anzeigen</summary>
+            <p class="mt-2 text-sm text-slate-300">
+              Angenommen, die Folge hätte zwei verschiedene Grenzwerte a und b. Wähle ε kleiner als die Hälfte von |a−b|. Dann müssten fast alle Folgenglieder zugleich in der ε-Umgebung von a und in der ε-Umgebung von b liegen. Diese Umgebungen sind aber disjunkt. Widerspruch.
+            </p>
+          </details>
         </article>
 
         <article class="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
-          <p class="mb-2 text-sm font-semibold text-pink-300">Aufgabe 3 · Beispiel</p>
+          <div class="mb-2 flex items-start justify-between gap-3">
+            <p class="text-sm font-semibold text-pink-300">Aufgabe 3 · Beispiel</p>
+            <a href="https://www.youtube.com/@annication" target="_blank" rel="noopener noreferrer" class="inline-flex h-8 w-8 items-center justify-center rounded-full border border-slate-700 text-sm text-slate-300 hover:border-pink-400 hover:text-pink-300" aria-label="Passendes Video öffnen">
+              ▶
+            </a>
+          </div>
           <h3 class="text-lg font-bold">Konvergiert diese Folge?</h3>
           <p class="mt-2 text-slate-300">
             Entscheide, ob aₙ = (-1)ⁿ konvergiert.
           </p>
           <p class="mt-3 text-sm text-slate-400">
-            Hilfreich: <a href="#bsp-nicht-konvergent" class="text-pink-300 hover:text-pink-200">Beispiel einer nicht konvergenten Folge</a>
+            Hilfreich: <a href="#satz-eindeutigkeit" class="text-pink-300 hover:text-pink-200">Satz zur Eindeutigkeit</a>,
+            <a href="#beweis-eindeutigkeit" class="text-pink-300 hover:text-pink-200"> Beweisidee</a>
           </p>
+          <details class="mt-4 rounded-lg border border-slate-800 p-3">
+            <summary class="cursor-pointer text-sm font-semibold text-slate-200">Lösung anzeigen</summary>
+            <p class="mt-2 text-sm text-slate-300">
+              Die Folge konvergiert nicht. Die geraden Folgenglieder sind 1, die ungeraden Folgenglieder sind -1. Damit nähert sich die Folge keinem einzelnen Wert dauerhaft an.
+            </p>
+          </details>
         </article>
       </div>
     </aside>
