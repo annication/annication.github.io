@@ -1,4 +1,149 @@
-<html>
-<head><title>Annication</title></head>
-<body><h1>Annication</h1></body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>annication</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @keyframes click-ring {
+    0% {
+      opacity: 0.8;
+      transform: translate(-50%, -50%) scale(0.4);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(1.8);
+    }
+  }
+
+  .click-ring {
+    animation: click-ring 500ms ease-out forwards;
+  }
+</style>
+</head>
+<body class="bg-slate-950 text-slate-100">
+
+<header class="border-b border-slate-800">
+  <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
+    <a href="#top" class="text-2xl font-bold tracking-tight">
+      <span class="text-pink-400">anni</span>cation
+    </a>
+
+    <nav class="hidden gap-6 text-sm text-slate-300 sm:flex">
+      <a href="#login" class="font-semibold text-pink-300 hover:text-white">Anmelden</a>
+      <a href="#kurse" class="hover:text-white">Kurse</a>
+      <a href="https://www.youtube.com/@annication" class="hover:text-white">YouTube</a>
+    </nav>
+  </div>
+</header>
+
+<section id="top" class="mx-auto max-w-5xl px-6 py-20 md:py-28">
+  <div class="grid items-center gap-10 md:grid-cols-[1fr_auto]">
+    <div>
+      <p class="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-pink-300">
+        Mathematik · Informatik
+      </p>
+
+      <h1 class="max-w-3xl text-5xl font-black tracking-tight md:text-7xl">
+        Lernen, bis es 
+        <span id="klick" class="relative inline-block cursor-pointer transition-all duration-200">
+          klickt
+        </span>.
+      </h1>
+
+      <div class="mt-6">
+        <span class="mb-4 inline-block rounded-full bg-pink-500/20 px-4 py-1 text-sm font-semibold text-pink-300">
+          100% kostenlos
+        </span>
+        <p class="max-w-2xl text-lg leading-8 text-slate-300">
+          Skripte, Erklärvideos und Aufgaben für dein Informatikstudium.
+        </p>
+      </div>
+
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a href="#kurse" class="rounded-xl bg-pink-500 px-5 py-3 text-center font-semibold text-white hover:bg-pink-400">
+          Kurse ansehen
+        </a>
+        <a href="https://www.youtube.com/@annication" class="rounded-xl border border-slate-700 px-5 py-3 text-center font-semibold text-slate-100 hover:bg-slate-900">
+          Zum YouTube-Kanal
+        </a>
+      </div>
+    </div>
+
+    <div class="hidden md:block">
+      <img src="rocket.png" alt="annication rocket" class="w-40 md:w-56" />
+    </div>
+  </div>
+</section>
+
+<section id="kurse" class="mx-auto max-w-5xl px-6 py-14">
+  <h2 class="text-3xl font-bold tracking-tight">Kurse</h2>
+  <p class="mt-3 max-w-2xl text-slate-300">
+    Klassische Uni-Module, aufbereitet und ergänzt.
+  </p>
+
+  <div class="mt-8 grid gap-4 md:grid-cols-2">
+    <a href="kurs/analysis-1.html" class="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 hover:border-pink-400">
+      <h3 class="text-xl font-bold">Analysis 1</h3>
+      <p class="mt-2 text-slate-300">Folgen, Reihen, Stetigkeit und Differentialrechnung.</p>
+    </a>
+
+    <a href="kurs/lineare-algebra-1.html" class="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 hover:border-pink-400">
+      <h3 class="text-xl font-bold">Lineare Algebra 1</h3>
+      <p class="mt-2 text-slate-300">Vektorräume, Matrizen und lineare Abbildungen.</p>
+    </a>
+
+    <a href="kurs/theoretische-grundbegriffe-der-informatik.html" class="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 hover:border-pink-400">
+      <h3 class="text-xl font-bold">Theoretische Grundbegriffe der Informatik</h3>
+      <p class="mt-2 text-slate-300">Automaten, formale Sprachen, Berechenbarkeit und Komplexität.</p>
+    </a>
+
+    <a href="kurs/algorithmen-und-datenstrukturen.html" class="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 hover:border-pink-400">
+      <h3 class="text-xl font-bold">Algorithmen und Datenstrukturen</h3>
+      <p class="mt-2 text-slate-300">Algorithmen, Datenstrukturen sowie Korrektheits- und Laufzeitbeweise.</p>
+    </a>
+  </div>
+</section>
+
+<section id="login" class="mx-auto max-w-5xl px-6 py-20">
+  <div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-8 text-center">
+    <h2 class="text-3xl font-bold">Anmeldung kommt bald</h2>
+    <p class="mt-4 text-slate-300">
+      Unsere Website ist noch im Aufbau. Später kannst du hier deinen Fortschritt speichern.
+    </p>
+  </div>
+</section>
+
+<footer class="border-t border-slate-800">
+  <div class="mx-auto max-w-5xl px-6 py-8 text-sm text-slate-400">
+    © annication
+  </div>
+</footer>
+
+<script>
+const klick = document.getElementById("klick");
+
+function animateClick() {
+  if (!klick) {
+    return;
+  }
+
+  klick.classList.add("scale-90", "text-pink-300");
+
+  const circle = document.createElement("span");
+  circle.className = "pointer-events-none absolute left-1/2 top-1/2 h-20 w-20 rounded-full border-4 border-pink-400/70 click-ring";
+  klick.appendChild(circle);
+
+  setTimeout(() => {
+    klick.classList.remove("scale-90", "text-pink-300");
+    circle.remove();
+  }, 500);
+}
+
+setTimeout(animateClick, 2000);
+klick.addEventListener("click", animateClick);
+</script>
+
+</body>
 </html>
