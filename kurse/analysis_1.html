@@ -6,146 +6,360 @@
   <title>Analysis 1 · annication</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" type="image/png" href="../favicon/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="../favicon/favicon.svg" />
-  <link rel="shortcut icon" href="../favicon/favicon.ico" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .hidden-panel {
+      display: none;
+    }
+
+    .full-panel {
+      grid-column: span 2 / span 2;
+    }
+
+    .content-hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body class="bg-slate-950 text-slate-100">
 
-<header class="border-b border-slate-800">
-  <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-5">
+<header class="sticky top-0 z-30 border-b border-slate-800 bg-slate-950/95 backdrop-blur">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
     <a href="../index.html" class="text-2xl font-bold tracking-tight">
       anni<span class="text-pink-400">cation</span>
     </a>
 
-    <nav class="hidden gap-6 text-sm text-slate-300 sm:flex">
-      <a href="../index.html#kurse" class="hover:text-white">Kurse</a>
-      <a href="#skript" class="hover:text-white">Skript</a>
-      <a href="#aufgaben" class="hover:text-white">Aufgaben</a>
-      <a href="https://www.youtube.com/@annication" class="hover:text-white">YouTube</a>
+    <nav class="hidden gap-6 text-sm sm:flex">
+      <button id="navBoth" class="hover:text-white">Kurs</button>
+      <button id="navExercises" class="hover:text-white">Aufgaben</button>
+      <button id="navScript" class="hover:text-white">Skript</button>
     </nav>
   </div>
 </header>
 
-<main>
-  <section class="mx-auto max-w-5xl px-6 py-16 md:py-24">
-    <p class="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-pink-300">
+<main class="mx-auto max-w-7xl px-6 py-8">
+  <section id="top" class="mb-8">
+    <p class="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-pink-300">
       Mathematik
     </p>
 
-    <h1 class="max-w-3xl text-5xl font-black tracking-tight md:text-7xl">
-      Analysis 1
-    </h1>
-
-    <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-      Folgen, Reihen, Stetigkeit und Differentialrechnung – aufbereitet mit Skript,
-      Erklärvideos, Aufgaben und Lösungen.
-    </p>
-
-    <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-      <a href="#kapitel" class="rounded-xl bg-pink-500 px-5 py-3 text-center font-semibold text-white hover:bg-pink-400">
-        Kapitel ansehen
-      </a>
-      <a href="#skript" class="rounded-xl border border-slate-700 px-5 py-3 text-center font-semibold text-slate-100 hover:bg-slate-900">
-        Zum Skript
-      </a>
-    </div>
-  </section>
-
-  <section id="kapitel" class="mx-auto max-w-5xl px-6 py-12">
-    <h2 class="text-3xl font-bold tracking-tight">Kapitel</h2>
-    <p class="mt-3 max-w-2xl text-slate-300">
-      Der Kurs wird schrittweise aufgebaut. Jede Lektion soll Theorie mit zugehörigen Übungsaufgaben verbinden.
-    </p>
-
-    <div class="mt-8 space-y-4">
-      <article class="rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
-        <h3 class="text-xl font-bold">1. Grundlagen</h3>
-        <div class="mt-4 grid gap-3 md:grid-cols-3">
-          <a href="#" class="rounded-xl border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm text-slate-300 hover:border-pink-400 hover:text-white">Mengen und Aussagen</a>
-          <a href="#" class="rounded-xl border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm text-slate-300 hover:border-pink-400 hover:text-white">Beweismethoden</a>
-          <a href="#" class="rounded-xl border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm text-slate-300 hover:border-pink-400 hover:text-white">Abbildungen</a>
-        </div>
-      </article>
-
-      <article class="rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
-        <h3 class="text-xl font-bold">2. Zahlen, Folgen und Grenzwerte</h3>
-        <div class="mt-4 grid gap-3 md:grid-cols-3">
-          <a href="#" class="rounded-xl border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm text-slate-300 hover:border-pink-400 hover:text-white">Reelle Zahlen</a>
-          <a href="#" class="rounded-xl border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm text-slate-300 hover:border-pink-400 hover:text-white">Folgen</a>
-          <a href="#" class="rounded-xl border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm text-slate-300 hover:border-pink-400 hover:text-white">Grenzwerte</a>
-        </div>
-      </article>
-
-      <article class="rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
-        <h3 class="text-xl font-bold">3. Reihen und Stetigkeit</h3>
-        <div class="mt-4 grid gap-3 md:grid-cols-3">
-          <a href="#" class="rounded-xl border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm text-slate-300 hover:border-pink-400 hover:text-white">Reihen</a>
-          <a href="#" class="rounded-xl border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm text-slate-300 hover:border-pink-400 hover:text-white">Konvergenzkriterien</a>
-          <a href="#" class="rounded-xl border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm text-slate-300 hover:border-pink-400 hover:text-white">Stetigkeit</a>
-        </div>
-      </article>
-
-      <article class="rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
-        <h3 class="text-xl font-bold">4. Differentialrechnung</h3>
-        <div class="mt-4 grid gap-3 md:grid-cols-3">
-          <a href="#" class="rounded-xl border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm text-slate-300 hover:border-pink-400 hover:text-white">Ableitung</a>
-          <a href="#" class="rounded-xl border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm text-slate-300 hover:border-pink-400 hover:text-white">Mittelwertsatz</a>
-          <a href="#" class="rounded-xl border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm text-slate-300 hover:border-pink-400 hover:text-white">Taylor-Approximation</a>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section id="skript" class="mx-auto max-w-5xl px-6 py-12">
-    <h2 class="text-3xl font-bold tracking-tight">Skript</h2>
-    <p class="mt-3 max-w-2xl text-slate-300">
-      Später kannst du das Skript vollständig lesen oder gezielt nach Definitionen,
-      Sätzen, Beispielen und Beweisen filtern.
-    </p>
-
-    <div class="mt-8 grid gap-4 md:grid-cols-4">
-      <div class="rounded-2xl border border-pink-400/30 bg-pink-500/10 p-5">
-        <h3 class="font-bold text-pink-300">Definitionen</h3>
-        <p class="mt-2 text-sm leading-6 text-slate-300">Begriffe kurz erklärt.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
-        <h3 class="font-bold">Sätze</h3>
-        <p class="mt-2 text-sm leading-6 text-slate-300">Zentrale Aussagen und Anwendungen.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
-        <h3 class="font-bold">Beweise</h3>
-        <p class="mt-2 text-sm leading-6 text-slate-300">Schrittweise und verständlich.</p>
-      </div>
-      <div class="rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
-        <h3 class="font-bold">Beispiele</h3>
-        <p class="mt-2 text-sm leading-6 text-slate-300">Rechnen, Einordnen, Verstehen.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="aufgaben" class="mx-auto max-w-5xl px-6 py-12">
-    <h2 class="text-3xl font-bold tracking-tight">Aufgaben</h2>
-    <p class="mt-3 max-w-2xl text-slate-300">
-      Aufgaben werden später nach Lektionen sortiert und enthalten Hinweise, Lösungen und ein passendes Video.
-    </p>
-
-    <div class="mt-8 rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
-      <h3 class="text-xl font-bold">Beispiel-Aufgabe</h3>
-      <p class="mt-2 text-slate-300">
-        Zeige mit der Definition des Grenzwerts, dass die Folge aₙ = 1/n gegen 0 konvergiert.
+    <div>
+      <h1 class="text-4xl font-black tracking-tight md:text-6xl">Analysis 1</h1>
+      <p class="mt-4 max-w-2xl text-slate-300">
+        Bearbeite Aufgaben und lies parallel dazu im Skript.
       </p>
-      <button class="mt-4 rounded-xl border border-slate-700 px-4 py-2 text-sm font-semibold text-slate-100 hover:bg-slate-800">
-        Lösung kommt bald
-      </button>
+
+      <div class="mt-6 flex gap-3">
+        <button id="btnExercises" class="rounded-xl bg-slate-800 px-4 py-2 text-sm font-semibold text-slate-300 hover:bg-slate-700">
+          Aufgaben anzeigen
+        </button>
+        <button id="btnScript" class="rounded-xl bg-slate-800 px-4 py-2 text-sm font-semibold text-slate-300 hover:bg-slate-700">
+          Skript anzeigen
+        </button>
+      </div>
     </div>
+  </section>
+
+  <section class="grid gap-6 lg:grid-cols-2" id="workspace">
+    <aside id="aufgaben" class="rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
+      <div class="mb-5">
+        <h2 class="text-2xl font-bold">Aufgaben</h2>
+        <p class="mt-1 text-sm text-slate-400">Aufgaben verlinken direkt auf passende Skriptstellen.</p>
+      </div>
+
+      <div class="space-y-4">
+        <article class="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
+          <p class="mb-2 text-sm font-semibold text-pink-300">Aufgabe 1 · Grenzwerte</p>
+          <h3 class="text-lg font-bold">Finde den Grenzwert</h3>
+          <p class="mt-2 text-slate-300">
+            Untersuche die Folge aₙ = 1/n und bestimme ihren Grenzwert.
+          </p>
+          <p class="mt-3 text-sm text-slate-400">
+            Hilfreich: <a href="#def-grenzwert" class="text-pink-300 hover:text-pink-200">Definition Grenzwert</a>
+          </p>
+          <details class="mt-4 rounded-lg border border-slate-800 p-3">
+            <summary class="cursor-pointer text-sm font-semibold text-slate-200">Hinweis anzeigen</summary>
+            <p class="mt-2 text-sm text-slate-300">Nutze die ε-Definition und wähle N groß genug.</p>
+          </details>
+        </article>
+
+        <article class="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
+          <p class="mb-2 text-sm font-semibold text-pink-300">Aufgabe 2 · Beweis</p>
+          <h3 class="text-lg font-bold">Zeige Eindeutigkeit des Grenzwerts</h3>
+          <p class="mt-2 text-slate-300">
+            Beweise, dass eine konvergente Folge höchstens einen Grenzwert besitzt.
+          </p>
+          <p class="mt-3 text-sm text-slate-400">
+            Hilfreich: <a href="#satz-eindeutigkeit" class="text-pink-300 hover:text-pink-200">Satz zur Eindeutigkeit</a>,
+            <a href="#beweis-eindeutigkeit" class="text-pink-300 hover:text-pink-200"> Beweisidee</a>
+          </p>
+        </article>
+
+        <article class="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
+          <p class="mb-2 text-sm font-semibold text-pink-300">Aufgabe 3 · Beispiel</p>
+          <h3 class="text-lg font-bold">Konvergiert diese Folge?</h3>
+          <p class="mt-2 text-slate-300">
+            Entscheide, ob aₙ = (-1)ⁿ konvergiert.
+          </p>
+          <p class="mt-3 text-sm text-slate-400">
+            Hilfreich: <a href="#bsp-nicht-konvergent" class="text-pink-300 hover:text-pink-200">Beispiel einer nicht konvergenten Folge</a>
+          </p>
+        </article>
+      </div>
+    </aside>
+
+    <section id="skript" class="rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
+      <div class="mb-5">
+        <h2 class="text-2xl font-bold">Skript</h2>
+        <p class="mt-1 text-sm text-slate-400">Filtere nach Definitionen, Sätzen, Beweisen und Beispielen.</p>
+      </div>
+
+      <nav class="sticky top-20 z-20 mb-5 flex flex-wrap items-center gap-2 rounded-xl border border-slate-800 bg-slate-950/90 p-3 backdrop-blur">
+        <button id="showAllScript" class="rounded-lg bg-pink-500 px-3 py-2 text-sm font-semibold text-white">Alles</button>
+        <span class="mx-1 h-7 w-px bg-slate-700" aria-hidden="true"></span>
+        <button class="script-filter rounded-lg bg-pink-500 px-3 py-2 text-sm font-semibold text-white" data-type="definition">Definitionen</button>
+        <button class="script-filter rounded-lg bg-pink-500 px-3 py-2 text-sm font-semibold text-white" data-type="satz">Sätze</button>
+        <button class="script-filter rounded-lg bg-pink-500 px-3 py-2 text-sm font-semibold text-white" data-type="beweis">Beweise</button>
+        <button class="script-filter rounded-lg bg-pink-500 px-3 py-2 text-sm font-semibold text-white" data-type="beispiel">Beispiele</button>
+      </nav>
+
+      <div class="space-y-4">
+        <h3 data-type="kapitel" class="script-block mt-2 scroll-mt-32 text-3xl font-black tracking-tight text-slate-100">
+          Folgen und Grenzwerte
+        </h3>
+
+        <p data-type="erklaerung" class="script-block leading-7 text-slate-300">
+          In der Analysis untersucht man häufig Prozesse, die sich einem bestimmten Wert annähern.
+          Folgen sind dafür eines der ersten und wichtigsten Modelle: Man betrachtet nicht einen einzelnen Wert,
+          sondern eine geordnete Liste von Werten und fragt, ob diese langfristig ein stabiles Verhalten zeigt.
+        </p>
+
+        <article id="def-grenzwert" data-type="definition" class="script-block rounded-xl border border-pink-400/30 bg-pink-500/10 p-4 scroll-mt-32">
+          <p class="mb-2 text-sm font-semibold text-pink-300">Definition</p>
+          <h3 class="text-xl font-bold">Grenzwert einer Folge</h3>
+          <p class="mt-3 leading-7 text-slate-300">
+            Eine Folge (aₙ) heißt konvergent gegen a, wenn für jedes ε &gt; 0 ein N existiert,
+            sodass für alle n ≥ N gilt: |aₙ − a| &lt; ε.
+          </p>
+        </article>
+
+        <p data-type="erklaerung" class="script-block leading-7 text-slate-300">
+          Die Definition sieht am Anfang technisch aus. Die Idee ist aber einfach: Ab einem gewissen Index
+          sollen alle Folgenglieder beliebig nah am Grenzwert liegen.
+        </p>
+
+        <article id="satz-eindeutigkeit" data-type="satz" class="script-block rounded-xl border border-blue-400/30 bg-blue-500/10 p-4 scroll-mt-32">
+          <p class="mb-2 text-sm font-semibold text-blue-300">Satz</p>
+          <h3 class="text-xl font-bold">Eindeutigkeit des Grenzwerts</h3>
+          <p class="mt-3 leading-7 text-slate-300">
+            Hat eine Folge einen Grenzwert, dann ist dieser Grenzwert eindeutig.
+          </p>
+        </article>
+
+        <article id="beweis-eindeutigkeit" data-type="beweis" class="script-block rounded-xl border border-emerald-400/30 bg-emerald-500/10 p-4 scroll-mt-32">
+          <p class="mb-2 text-sm font-semibold text-emerald-300">Beweis</p>
+          <h3 class="text-xl font-bold">Beweisidee zur Eindeutigkeit</h3>
+          <p class="mt-3 leading-7 text-slate-300">
+            Angenommen, eine Folge hätte zwei verschiedene Grenzwerte a und b. Dann wählt man ε so klein,
+            dass sich die ε-Umgebungen von a und b nicht überschneiden. Für große n müsste aₙ aber in beiden liegen.
+            Das ist ein Widerspruch.
+          </p>
+        </article>
+
+        <article id="bsp-nicht-konvergent" data-type="beispiel" class="script-block rounded-xl border border-yellow-400/30 bg-yellow-500/10 p-4 scroll-mt-32">
+          <p class="mb-2 text-sm font-semibold text-yellow-300">Beispiel</p>
+          <h3 class="text-xl font-bold">Die Folge (-1)ⁿ</h3>
+          <p class="mt-3 leading-7 text-slate-300">
+            Die Folge springt zwischen 1 und -1 hin und her. Sie nähert sich keinem einzelnen Wert dauerhaft an
+            und ist daher nicht konvergent.
+          </p>
+        </article>
+      </div>
+    </section>
   </section>
 </main>
 
-<footer class="border-t border-slate-800">
-  <div class="mx-auto max-w-5xl px-6 py-8 text-sm text-slate-400">
+<a href="#top" class="fixed bottom-6 right-6 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-pink-500 text-2xl font-bold text-white shadow-lg hover:bg-pink-400" aria-label="Nach oben">
+  ↑
+</a>
+
+<footer class="mt-12 border-t border-slate-800">
+  <div class="mx-auto max-w-7xl px-6 py-8 text-sm text-slate-400">
     © annication · <a href="../impressum.html" class="hover:text-white">Impressum</a> · <a href="../datenschutz.html" class="hover:text-white">Datenschutz</a>
   </div>
 </footer>
+
+<script>
+const exercisesPanel = document.getElementById("aufgaben");
+const scriptPanel = document.getElementById("skript");
+const navBothBtn = document.getElementById("navBoth");
+const navExercisesBtn = document.getElementById("navExercises");
+const navScriptBtn = document.getElementById("navScript");
+const btnExercises = document.getElementById("btnExercises");
+const btnScript = document.getElementById("btnScript");
+
+function setHeaderButtonState() {
+  const exercisesVisible = !exercisesPanel.classList.contains("hidden-panel");
+  const scriptVisible = !scriptPanel.classList.contains("hidden-panel");
+
+  const bothActive = exercisesVisible && scriptVisible;
+  const exercisesOnly = exercisesVisible && !scriptVisible;
+  const scriptOnly = scriptVisible && !exercisesVisible;
+
+  navBothBtn.classList.toggle("text-pink-300", bothActive);
+  navBothBtn.classList.toggle("font-semibold", bothActive);
+  navBothBtn.classList.toggle("text-slate-400", !bothActive);
+
+  navExercisesBtn.classList.toggle("text-pink-300", exercisesOnly);
+  navExercisesBtn.classList.toggle("font-semibold", exercisesOnly);
+  navExercisesBtn.classList.toggle("text-slate-400", !exercisesOnly);
+
+  navScriptBtn.classList.toggle("text-pink-300", scriptOnly);
+  navScriptBtn.classList.toggle("font-semibold", scriptOnly);
+  navScriptBtn.classList.toggle("text-slate-400", !scriptOnly);
+}
+
+function setLowerButtonState() {
+  const exercisesVisible = !exercisesPanel.classList.contains("hidden-panel");
+  const scriptVisible = !scriptPanel.classList.contains("hidden-panel");
+
+  btnExercises.classList.toggle("bg-pink-500", exercisesVisible);
+  btnExercises.classList.toggle("text-white", exercisesVisible);
+  btnExercises.classList.toggle("bg-slate-800", !exercisesVisible);
+  btnExercises.classList.toggle("text-slate-300", !exercisesVisible);
+
+  btnScript.classList.toggle("bg-pink-500", scriptVisible);
+  btnScript.classList.toggle("text-white", scriptVisible);
+  btnScript.classList.toggle("bg-slate-800", !scriptVisible);
+  btnScript.classList.toggle("text-slate-300", !scriptVisible);
+}
+
+function updateLayout() {
+  const exercisesVisible = !exercisesPanel.classList.contains("hidden-panel");
+  const scriptVisible = !scriptPanel.classList.contains("hidden-panel");
+
+  exercisesPanel.classList.toggle("full-panel", exercisesVisible && !scriptVisible);
+  scriptPanel.classList.toggle("full-panel", scriptVisible && !exercisesVisible);
+
+  setLowerButtonState();
+  setHeaderButtonState();
+}
+
+function showBoth() {
+  exercisesPanel.classList.remove("hidden-panel");
+  scriptPanel.classList.remove("hidden-panel");
+  updateLayout();
+}
+
+function showExercisesOnly() {
+  exercisesPanel.classList.remove("hidden-panel");
+  scriptPanel.classList.add("hidden-panel");
+  updateLayout();
+}
+
+function showScriptOnly() {
+  scriptPanel.classList.remove("hidden-panel");
+  exercisesPanel.classList.add("hidden-panel");
+  updateLayout();
+}
+
+function toggleExercises() {
+  const scriptVisible = !scriptPanel.classList.contains("hidden-panel");
+
+  if (scriptVisible) {
+    exercisesPanel.classList.toggle("hidden-panel");
+  } else {
+    exercisesPanel.classList.remove("hidden-panel");
+  }
+
+  updateLayout();
+}
+
+function toggleScript() {
+  const exercisesVisible = !exercisesPanel.classList.contains("hidden-panel");
+
+  if (exercisesVisible) {
+    scriptPanel.classList.toggle("hidden-panel");
+  } else {
+    scriptPanel.classList.remove("hidden-panel");
+  }
+
+  updateLayout();
+}
+
+navBothBtn.addEventListener("click", showBoth);
+navExercisesBtn.addEventListener("click", showExercisesOnly);
+navScriptBtn.addEventListener("click", showScriptOnly);
+btnExercises.addEventListener("click", toggleExercises);
+btnScript.addEventListener("click", toggleScript);
+
+const showAllScriptBtn = document.getElementById("showAllScript");
+const filterButtons = document.querySelectorAll(".script-filter");
+const scriptBlocks = document.querySelectorAll(".script-block");
+const filterTypes = ["definition", "satz", "beweis", "beispiel"];
+const activeTypes = new Set(filterTypes);
+let allMode = true;
+
+function setButtonActive(button, active) {
+  button.classList.toggle("bg-pink-500", active);
+  button.classList.toggle("text-white", active);
+  button.classList.toggle("bg-slate-800", !active);
+  button.classList.toggle("text-slate-500", !active);
+  button.classList.toggle("opacity-50", !active);
+}
+
+function updateScriptVisibility() {
+  setButtonActive(showAllScriptBtn, allMode);
+
+  filterButtons.forEach((button) => {
+    setButtonActive(button, activeTypes.has(button.dataset.type));
+  });
+
+  scriptBlocks.forEach((block) => {
+    const type = block.dataset.type;
+
+    if (type === "kapitel") {
+      block.classList.remove("content-hidden");
+      return;
+    }
+
+    if (allMode) {
+      block.classList.remove("content-hidden");
+      return;
+    }
+
+    block.classList.toggle("content-hidden", !activeTypes.has(type));
+  });
+}
+
+showAllScriptBtn.addEventListener("click", () => {
+  allMode = true;
+  activeTypes.clear();
+  filterTypes.forEach((type) => activeTypes.add(type));
+  updateScriptVisibility();
+});
+
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    allMode = false;
+    const type = button.dataset.type;
+
+    if (activeTypes.has(type)) {
+      activeTypes.delete(type);
+    } else {
+      activeTypes.add(type);
+    }
+
+    updateScriptVisibility();
+  });
+});
+
+showBoth();
+updateScriptVisibility();
+</script>
 
 </body>
 </html>
