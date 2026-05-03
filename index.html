@@ -20,6 +20,18 @@
   .click-ring {
     animation: click-ring 500ms ease-out forwards;
   }
+  @keyframes float-rocket {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-12px);
+    }
+  }
+
+  .rocket-float {
+    animation: float-rocket 3s ease-in-out infinite;
+  }
 </style>
 </head>
 <body class="bg-slate-950 text-slate-100">
@@ -72,7 +84,7 @@
     </div>
 
     <div class="hidden md:block">
-      <img src="rocket.png" alt="annication rocket" class="w-40 md:w-56" />
+      <img src="annication_rocket.png" alt="annication rocket" class="w-40 md:w-56 rocket-float" />
     </div>
   </div>
 </section>
