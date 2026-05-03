@@ -22,7 +22,57 @@
     .content-hidden {
       display: none;
     }
-  </style>
+    /* custom scrollbar for script content */
+  #scriptContent::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  #scriptContent::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  #scriptContent::-webkit-scrollbar-thumb {
+    background-color: rgba(236, 72, 153, 0.6); /* pink-500 */
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  #scriptContent::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(236, 72, 153, 0.9);
+  }
+
+  /* Firefox */
+  #scriptContent {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(236,72,153,0.6) transparent;
+  }
+
+  /* custom scrollbar for exercises */
+  #aufgabenContent::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  #aufgabenContent::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  #aufgabenContent::-webkit-scrollbar-thumb {
+    background-color: rgba(236, 72, 153, 0.6);
+    border-radius: 9999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  #aufgabenContent::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(236, 72, 153, 0.9);
+  }
+
+  #aufgabenContent {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(236,72,153,0.6) transparent;
+  }
+</style>
 </head>
 <body class="bg-slate-950 text-slate-100">
 
@@ -70,7 +120,7 @@
         <p class="mt-1 text-sm text-slate-400">Aufgaben verlinken direkt auf passende Skriptstellen.</p>
       </div>
 
-      <div class="space-y-4">
+      <div id="aufgabenContent" class="max-h-[58vh] overflow-y-auto pr-2 space-y-4">
         <article class="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
           <p class="mb-2 text-sm font-semibold text-pink-300">Aufgabe 1 · Grenzwerte</p>
           <h3 class="text-lg font-bold">Finde den Grenzwert</h3>
@@ -126,7 +176,7 @@
         <button class="script-filter rounded-lg bg-pink-500 px-3 py-2 text-sm font-semibold text-white" data-type="beispiel">Beispiele</button>
       </nav>
 
-      <div class="space-y-4">
+      <div id="scriptContent" class="max-h-[58vh] overflow-y-auto pr-2 space-y-4">
         <h3 data-type="kapitel" class="script-block mt-2 scroll-mt-32 text-3xl font-black tracking-tight text-slate-100">
           Folgen und Grenzwerte
         </h3>
@@ -193,6 +243,25 @@
 </footer>
 
 <script>
+// make in-panel anchor scrolling (so tasks don't move)
+document.querySelectorAll('#aufgaben a[href^="#"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const targetId = link.getAttribute('href');
+    const target = document.querySelector(targetId);
+
+    if (target) {
+      e.preventDefault();
+
+      const container = document.getElementById('scriptContent');
+      const offset = target.offsetTop - container.offsetTop;
+
+      container.scrollTo({
+        top: offset - 20,
+        behavior: 'smooth'
+      });
+    }
+  });
+});
 const exercisesPanel = document.getElementById("aufgaben");
 const scriptPanel = document.getElementById("skript");
 const navBothBtn = document.getElementById("navBoth");
