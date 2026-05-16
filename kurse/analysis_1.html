@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Analysis 1 · annication</title>
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+
+  <script defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+
+  <script defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
   <link rel="icon" type="image/png" href="../favicon/favicon-96x96.png" sizes="96x96" />
   <style>
     html {
@@ -22,57 +31,36 @@
     .content-hidden {
       display: none;
     }
-    /* custom scrollbar for script content */
-  #scriptContent::-webkit-scrollbar {
-    width: 10px;
-  }
 
-  #scriptContent::-webkit-scrollbar-track {
-    background: transparent;
-  }
+    #scriptContent::-webkit-scrollbar,
+    #aufgabenContent::-webkit-scrollbar {
+      width: 10px;
+    }
 
-  #scriptContent::-webkit-scrollbar-thumb {
-    background-color: rgba(236, 72, 153, 0.6); /* pink-500 */
-    border-radius: 9999px;
-    border: 2px solid transparent;
-    background-clip: content-box;
-  }
+    #scriptContent::-webkit-scrollbar-track,
+    #aufgabenContent::-webkit-scrollbar-track {
+      background: transparent;
+    }
 
-  #scriptContent::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(236, 72, 153, 0.9);
-  }
+    #scriptContent::-webkit-scrollbar-thumb,
+    #aufgabenContent::-webkit-scrollbar-thumb {
+      background-color: rgba(236, 72, 153, 0.6);
+      border-radius: 9999px;
+      border: 2px solid transparent;
+      background-clip: content-box;
+    }
 
-  /* Firefox */
-  #scriptContent {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(236,72,153,0.6) transparent;
-  }
+    #scriptContent::-webkit-scrollbar-thumb:hover,
+    #aufgabenContent::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(236, 72, 153, 0.9);
+    }
 
-  /* custom scrollbar for exercises */
-  #aufgabenContent::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  #aufgabenContent::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  #aufgabenContent::-webkit-scrollbar-thumb {
-    background-color: rgba(236, 72, 153, 0.6);
-    border-radius: 9999px;
-    border: 2px solid transparent;
-    background-clip: content-box;
-  }
-
-  #aufgabenContent::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(236, 72, 153, 0.9);
-  }
-
-  #aufgabenContent {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(236,72,153,0.6) transparent;
-  }
-</style>
+    #scriptContent,
+    #aufgabenContent {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(236,72,153,0.6) transparent;
+    }
+  </style>
 </head>
 <body class="bg-slate-950 text-slate-100">
 
@@ -132,10 +120,11 @@
           </div>
           <h3 class="text-lg font-bold">Finde den Grenzwert</h3>
           <p class="mt-2 text-slate-300">
-            Untersuche die Folge aₙ = 1/n und bestimme ihren Grenzwert.
+            Untersuche die Folge \(a_n = \frac{1}{n}\) und bestimme ihren Grenzwert.
           </p>
           <p class="mt-3 text-sm text-slate-400">
-            Hilfreich: <a href="#def-grenzwert" class="text-pink-300 hover:text-pink-200">Definition Grenzwert</a>
+            Hilfreich: <a href="#def-grenzwert" class="text-pink-300 hover:text-pink-200">Definition Grenzwert</a>,
+            <a href="#hinweis-epsilon" class="text-pink-300 hover:text-pink-200"> Hinweis zu ε</a>
           </p>
           <details class="mt-4 rounded-lg border border-slate-800 p-3">
             <summary class="cursor-pointer text-sm font-semibold text-slate-200">Hinweis anzeigen</summary>
@@ -144,7 +133,7 @@
           <details class="mt-3 rounded-lg border border-slate-800 p-3">
             <summary class="cursor-pointer text-sm font-semibold text-slate-200">Lösung anzeigen</summary>
             <p class="mt-2 text-sm text-slate-300">
-              Die Folge 1/n konvergiert gegen 0. Für jedes ε &gt; 0 wähle N &gt; 1/ε. Dann gilt für alle n ≥ N: |1/n − 0| = 1/n ≤ 1/N &lt; ε.
+              Die Folge \(\frac{1}{n}\) konvergiert gegen \(0\). Für jedes \(\varepsilon > 0\) wähle \(N > \frac{1}{\varepsilon}\). Dann gilt für alle \(n \geq N\): \(\left|\frac{1}{n} - 0\right| = \frac{1}{n} \leq \frac{1}{N} < \varepsilon\).
             </p>
           </details>
         </article>
@@ -188,8 +177,7 @@
             Entscheide, ob aₙ = (-1)ⁿ konvergiert.
           </p>
           <p class="mt-3 text-sm text-slate-400">
-            Hilfreich: <a href="#satz-eindeutigkeit" class="text-pink-300 hover:text-pink-200">Satz zur Eindeutigkeit</a>,
-            <a href="#beweis-eindeutigkeit" class="text-pink-300 hover:text-pink-200"> Beweisidee</a>
+            Hilfreich: <a href="#bsp-nicht-konvergent" class="text-pink-300 hover:text-pink-200">Beispiel (-1)ⁿ</a>
           </p>
           <details class="mt-4 rounded-lg border border-slate-800 p-3">
             <summary class="cursor-pointer text-sm font-semibold text-slate-200">Lösung anzeigen</summary>
@@ -204,7 +192,7 @@
     <section id="skript" class="rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
       <div class="mb-5">
         <h2 class="text-2xl font-bold">Skript</h2>
-        <p class="mt-1 text-sm text-slate-400">Filtere nach Definitionen, Sätzen, Beweisen und Beispielen.</p>
+        <p class="mt-1 text-sm text-slate-400">Filtere nach Definitionen, Sätzen, Beweisen, Beispielen und Hinweisen.</p>
       </div>
 
       <nav class="sticky top-20 z-20 mb-5 flex flex-wrap items-center gap-2 rounded-xl border border-slate-800 bg-slate-950/90 p-3 backdrop-blur">
@@ -212,67 +200,637 @@
         <span class="mx-1 h-7 w-px bg-slate-700" aria-hidden="true"></span>
         <button class="script-filter rounded-lg bg-pink-500 px-3 py-2 text-sm font-semibold text-white" data-type="definition">Definitionen</button>
         <button class="script-filter rounded-lg bg-pink-500 px-3 py-2 text-sm font-semibold text-white" data-type="satz">Sätze</button>
-        <button class="script-filter rounded-lg bg-pink-500 px-3 py-2 text-sm font-semibold text-white" data-type="beweis">Beweise</button>
-        <button class="script-filter rounded-lg bg-pink-500 px-3 py-2 text-sm font-semibold text-white" data-type="beispiel">Beispiele</button>
+        <button class="filter rounded-lg bg-pink-500 px-3 py-2 text-sm font-semibold text-white" data-type="beweis">Beweise</button>
+        <button class="filter rounded-lg bg-pink-500 px-3 py-2 text-sm font-semibold text-white" data-type="beispiel">Beispiele</button>
+        <button class="filter rounded-lg bg-pink-500 px-3 py-2 text-sm font-semibold text-white" data-type="bemerkung">Bemerkungen</button>
       </nav>
 
-      <div id="scriptContent" class="max-h-[58vh] overflow-y-auto pr-2 space-y-4">
+      <!--
+════════════════════════════════════════════════════
+ANNICATION BLOCKTEMPLATES
+════════════════════════════════════════════════════
+
+KAPITEL
+----------------------------------------------------
+<h3 data-type="kapitel" class="script-block mt-10 scroll-mt-32 text-3xl font-black tracking-tight text-slate-100">
+  Kapitelname
+</h3>
+
+ERKLÄRUNG
+----------------------------------------------------
+<p data-type="erklaerung" class="script-block leading-7 text-slate-300">
+  Erklärungstext.
+</p>
+
+DEFINITION
+----------------------------------------------------
+<article id="def-name" data-type="definition" class="script-block rounded-xl border border-pink-400/30 bg-pink-500/10 p-4 scroll-mt-32">
+  <p class="mb-2 text-sm font-semibold text-pink-300">
+    Definition
+  </p>
+
+  <h3 class="text-xl font-bold">
+    Titel
+  </h3>
+
+  <p class="mt-3 leading-7 text-slate-300">
+    Definitionstext.
+  </p>
+
+  <div class="mt-4 overflow-x-auto rounded-lg bg-slate-950/60 p-4 text-center text-lg text-slate-100">
+    \[
+      a_n \to a
+    \]
+  </div>
+</article>
+
+SATZ
+----------------------------------------------------
+<article id="satz-name"
+         data-type="satz"
+         class="script-block rounded-xl border border-blue-400/30 bg-blue-500/10 p-4 scroll-mt-32">
+
+  <p class="mb-2 text-sm font-semibold text-blue-300">
+    Satz
+  </p>
+
+  <h3 class="text-xl font-bold">
+    Titel
+  </h3>
+
+  <p class="mt-3 leading-7 text-slate-300">
+    Aussage.
+  </p>
+</article>
+
+BEWEIS
+----------------------------------------------------
+<article id="beweis-name"
+         data-type="beweis"
+         class="script-block rounded-xl border border-emerald-400/30 bg-emerald-500/10 p-4 scroll-mt-32">
+
+  <p class="mb-2 text-sm font-semibold text-emerald-300">
+    Beweis
+  </p>
+
+  <h3 class="text-xl font-bold">
+    Titel
+  </h3>
+
+  <p class="mt-3 leading-7 text-slate-300">
+    Beweistext.
+  </p>
+</article>
+
+BEISPIEL
+----------------------------------------------------
+<article id="bsp-name"
+         data-type="beispiel"
+         class="script-block rounded-xl border border-yellow-400/30 bg-yellow-500/10 p-4 scroll-mt-32">
+
+  <p class="mb-2 text-sm font-semibold text-yellow-300">
+    Beispiel
+  </p>
+
+  <h3 class="text-xl font-bold">
+    Titel
+  </h3>
+
+  <p class="mt-3 leading-7 text-slate-300">
+    Beispieltext.
+  </p>
+</article>
+
+HINWEIS
+----------------------------------------------------
+<article id="hinweis-name"
+         data-type="hinweis"
+         class="script-block rounded-xl border border-violet-400/30 bg-violet-500/10 p-4 scroll-mt-32">
+
+  <p class="mb-2 text-sm font-semibold text-violet-300">
+    Hinweis
+  </p>
+
+  <h3 class="text-xl font-bold">
+    Titel
+  </h3>
+
+  <p class="mt-3 leading-7 text-slate-300">
+    Hinweistext.
+  </p>
+</article>
+
+AUFGABE
+----------------------------------------------------
+<article class="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
+
+  <h3 class="text-lg font-bold">
+    Titel der Aufgabe
+  </h3>
+
+  <p class="mt-2 text-slate-300">
+    Aufgabenstellung.
+  </p>
+
+  <details class="mt-4 rounded-lg border border-slate-800 p-3">
+    <summary class="cursor-pointer text-sm font-semibold text-slate-200">
+      Hinweis anzeigen
+    </summary>
+
+    <p class="mt-2 text-sm text-slate-300">
+      Hinweis.
+    </p>
+  </details>
+
+  <details class="mt-3 rounded-lg border border-slate-800 p-3">
+    <summary class="cursor-pointer text-sm font-semibold text-slate-200">
+      Lösung anzeigen
+    </summary>
+
+    <p class="mt-2 text-sm text-slate-300">
+      Lösung.
+    </p>
+  </details>
+</article>
+
+════════════════════════════════════════════════════
+END TEMPLATES
+════════════════════════════════════════════════════
+-->
+
+<div id="scriptContent" class="max-h-[58vh] overflow-y-auto pr-2 space-y-4">
         <h3 data-type="kapitel" class="script-block mt-2 scroll-mt-32 text-3xl font-black tracking-tight text-slate-100">
-          Folgen und Grenzwerte
+			Folgen und Grenzwerte
         </h3>
 
         <p data-type="erklaerung" class="script-block leading-7 text-slate-300">
-          In der Analysis untersucht man häufig Prozesse, die sich einem bestimmten Wert annähern.
-          Folgen sind dafür eines der ersten und wichtigsten Modelle: Man betrachtet nicht einen einzelnen Wert,
-          sondern eine geordnete Liste von Werten und fragt, ob diese langfristig ein stabiles Verhalten zeigt.
+			In der Analysis untersuchen wir häufig Prozesse, die sich einem bestimmten Wert annähern.
+			Folgen sind dafür eines der ersten und wichtigsten Modelle: Wir betrachten nicht einen einzelnen Wert,
+			sondern eine geordnete Liste von Werten und fragen, ob diese langfristig ein stabiles Verhalten zeigt.
         </p>
+		
+		<article id="def-folge" data-type="definition" class="script-block rounded-xl border border-pink-400/30 bg-pink-500/10 p-4 scroll-mt-32">
+			<p class="mb-2 text-sm font-semibold text-pink-300">
+				Definition
+			</p>
 
-        <article id="def-grenzwert" data-type="definition" class="script-block rounded-xl border border-pink-400/30 bg-pink-500/10 p-4 scroll-mt-32">
-          <p class="mb-2 text-sm font-semibold text-pink-300">Definition</p>
-          <h3 class="text-xl font-bold">Grenzwert einer Folge</h3>
-          <p class="mt-3 leading-7 text-slate-300">
-            Eine Folge (aₙ) heißt konvergent gegen a, wenn für jedes ε &gt; 0 ein N existiert,
-            sodass für alle n ≥ N gilt: |aₙ − a| &lt; ε.
-          </p>
+			<h3 class="text-xl font-bold">
+				Folge
+			</h3>
+
+			<p class="mt-3 leading-7 text-slate-300">
+				Eine Folge ist eine Abbildung
+				\[
+					\phi : \mathbb{N} \to M
+				\]
+			</p>
+
+			<p class="mt-4 leading-7 text-slate-300">
+				Dabei ist \(M\) eine Menge. Jedem \(n \in \mathbb{N}\) wird also ein Element \(a_n \in M\) zugeordnet. 
+				Statt \(\phi(n)\) schreiben wir meist \(a_n\) und bezeichnen die Folge beispielsweise mit \((a_n)_{n \geq 1}\), \((a_n)_{n \in \mathbb{N}}\) oder kurz \((a_n)\). 
+				Die Elemente \(a_n\) nennen wir Folgenglieder.
+			</p>
+		  
+			<p class="mt-4 leading-7 text-slate-300">
+				Geht die Abbildung \(\phi\) nach \(\mathbb{C}\), sind also alle Folgenglieder komplex,
+				nennen wir die Folge <em>komplexe Folge</em>.
+				Sind alle Folgenglieder reell, nennen wir sie <em>reelle Folge</em>.
+			</p>
+
+			<p class="mt-4 leading-7 text-slate-300">
+				Häufig schreibt man eine Folge auch suggestiv als
+				\(
+					(a_1, a_2, a_3, \dots)
+				\).
+			</p>
+		</article>
+		
+		<article id="def-konvergenz" data-type="definition" class="script-block rounded-xl border border-pink-400/30 bg-pink-500/10 p-4 scroll-mt-32">
+
+			<p class="mb-2 text-sm font-semibold text-pink-300">
+				Definition
+			</p>
+
+			<h3 class="text-xl font-bold">
+				Konvergenz einer Folge
+			</h3>
+
+			<p class="mt-3 leading-7 text-slate-300">
+				Sei \((a_n)_{n \geq 1}\) eine komplexe Folge und \(a \in \mathbb{C}\).
+				Die Folge \((a_n)\) konvergiert gegen \(a\), wenn es zu jedem gegebenen (noch so kleinen) Abstand
+				\(\varepsilon > 0\) einen Startindex \(N_\varepsilon \in \mathbb{N}\) gibt,
+				sodass für alle \(n \in \mathbb{N}\) mit \(n \geq N_\varepsilon\) gilt:
+				\[
+					|a_n - a| \leq \varepsilon
+				\]
+			</p>
+
+			<p class="mt-4 leading-7 text-slate-300">
+				Formal:
+			</p>
+
+			<div class="mt-4 overflow-x-auto rounded-lg bg-slate-950/60 p-4 text-center text-lg text-slate-100">
+				\[
+					\forall \varepsilon > 0 \;
+					\exists N_\varepsilon \in \mathbb{N} \;
+					\forall n \geq N_\varepsilon :
+					|a_n - a| \leq \varepsilon
+				\]
+			</div>
+
+			<p class="mt-4 leading-7 text-slate-300">
+				Die Zahl \(a\) heißt dann Grenzwert oder Limes der Folge.
+				Wir schreiben
+				\[
+					a = \lim_{n \to \infty} a_n
+				\]
+				oder kurz
+				\[
+					a_n \to a \quad (n \to \infty)
+				\]
+			</p>
+
+			<p class="mt-4 leading-7 text-slate-300">
+				Im Spezialfall
+				\(a_n \to 0\)
+				nennen wir die Folge eine <em>Nullfolge</em>.
+				Eine Folge, die nicht konvergiert, heißt <em>divergent</em>.
+			</p>
+		</article>
+		
+		<article id="bsp-nicht-konvergent" data-type="beispiel" class="script-block rounded-xl border border-yellow-400/30 bg-yellow-500/10 p-4 scroll-mt-32">
+			<p class="mb-2 text-sm font-semibold text-yellow-300">Beispiel</p>
+			<p class="mt-3 leading-7 text-slate-300">
+				Die Folge \(a_n = (-1)^n\) springt zwischen \(1\) und \(-1\) hin und her. Sie nähert sich keinem einzelnen Wert dauerhaft an und ist daher nicht konvergent.
+			</p>
+			<div class="my-5 h-px bg-yellow-300/20"></div>
+			<p class="mt-3 leading-7 text-slate-300">
+				Die Folge \(a_n = \frac{1}{n}\)
+				wird dagegen immer kleiner.
+				Für große \(n\) liegen die Folgenglieder beliebig nah bei \(0\).
+				Daher gilt \(\frac{1}{n} \to 0 \quad (n \to \infty)\).
+			</p>
         </article>
 
         <p data-type="erklaerung" class="script-block leading-7 text-slate-300">
-          Die Definition sieht am Anfang technisch aus. Die Idee ist aber einfach: Ab einem gewissen Index
-          sollen alle Folgenglieder beliebig nah am Grenzwert liegen.
+			Die Definition sieht am Anfang technisch aus. Die Idee ist aber einfach: Ab einem gewissen Index
+			sollen alle Folgenglieder beliebig nah am Grenzwert liegen.
         </p>
+		
+		<article id="satz-beschrenktheit" data-type="satz" class="script-block rounded-xl border border-blue-400/30 bg-blue-500/10 p-4 scroll-mt-32">
+			<p class="mb-2 text-sm font-semibold text-blue-300">Satz</p>
+			<h3 class="text-xl font-bold">Konvergenz impliziert Beschränktheit</h3>
+			<p class="mt-3 leading-7 text-slate-300">
+				Hat eine Folge einen Grenzwert, dann ist diese Folge beschränkt.
+			</p>
+        </article>
 
         <article id="satz-eindeutigkeit" data-type="satz" class="script-block rounded-xl border border-blue-400/30 bg-blue-500/10 p-4 scroll-mt-32">
-          <p class="mb-2 text-sm font-semibold text-blue-300">Satz</p>
-          <h3 class="text-xl font-bold">Eindeutigkeit des Grenzwerts</h3>
-          <p class="mt-3 leading-7 text-slate-300">
-            Hat eine Folge einen Grenzwert, dann ist dieser Grenzwert eindeutig.
-          </p>
+			<p class="mb-2 text-sm font-semibold text-blue-300">Satz</p>
+			<h3 class="text-xl font-bold">Der Grenzwert ist eindeutig</h3>
+			<p class="mt-3 leading-7 text-slate-300">
+				Hat eine Folge einen Grenzwert, dann ist dieser Grenzwert eindeutig.
+			</p>
         </article>
 
         <article id="beweis-eindeutigkeit" data-type="beweis" class="script-block rounded-xl border border-emerald-400/30 bg-emerald-500/10 p-4 scroll-mt-32">
-          <p class="mb-2 text-sm font-semibold text-emerald-300">Beweis</p>
-          <h3 class="text-xl font-bold">Beweisidee zur Eindeutigkeit</h3>
-          <p class="mt-3 leading-7 text-slate-300">
-            Angenommen, eine Folge hätte zwei verschiedene Grenzwerte a und b. Dann wählt man ε so klein,
-            dass sich die ε-Umgebungen von a und b nicht überschneiden. Für große n müsste aₙ aber in beiden liegen.
-            Das ist ein Widerspruch.
-          </p>
+			<p class="mb-2 text-sm font-semibold text-emerald-300">Beweis</p>
+			<h3 class="text-xl font-bold">Beweisidee zur Eindeutigkeit</h3>
+			<p class="mt-3 leading-7 text-slate-300">
+				Angenommen, eine Folge hätte zwei verschiedene Grenzwerte a und b. Dann wählen wir ε so klein,
+				dass sich die ε-Umgebungen von a und b nicht überschneiden. Für große n müsste aₙ aber in beiden liegen.
+				Das ist ein Widerspruch.
+			</p>
         </article>
+		
+		<article id="hinweis-konvergenz" data-type="bemerkung" class="script-block rounded-xl border border-violet-400/30 bg-violet-500/10 p-4 scroll-mt-32">
 
-        <article id="bsp-nicht-konvergent" data-type="beispiel" class="script-block rounded-xl border border-yellow-400/30 bg-yellow-500/10 p-4 scroll-mt-32">
-          <p class="mb-2 text-sm font-semibold text-yellow-300">Beispiel</p>
-          <h3 class="text-xl font-bold">Die Folge (-1)ⁿ</h3>
-          <p class="mt-3 leading-7 text-slate-300">
-            Die Folge springt zwischen 1 und -1 hin und her. Sie nähert sich keinem einzelnen Wert dauerhaft an
-            und ist daher nicht konvergent.
-          </p>
-        </article>
-      </div>
-    </section>
-  </section>
+			<p class="mb-2 text-sm font-semibold text-violet-300">
+				Gut zu wissen
+			</p>
+
+			<p class="mt-3 leading-7 text-slate-300">
+				In der Definition von Konvergenz ist es egal,
+				ob wir
+				\(
+				  |a_n-a| \leq \varepsilon
+				\)
+				oder
+				\(
+				  |a_n-a| \lt \varepsilon
+				\)
+				fordern.
+			</p>
+
+			<p class="mt-3 leading-7 text-slate-300">
+				Auch wenn wir den Abstand nur bis auf einen festen (also von \(\varepsilon\) und \(n\) unabhängigen) Faktor \(c\) kontrollieren können (
+				\(
+				  \forall \varepsilon > 0 \;
+				  \exists N_\varepsilon \in \mathbb{N} \;
+				  \forall n \geq N_\varepsilon :
+				  |a_n - a| \leq c \times \varepsilon
+				\)
+				), 
+				bleibt der Grenzwert derselbe.
+			</p>
+
+			<p class="mt-3 leading-7 text-slate-300">
+				Außerdem ändert das Weglassen von oder Verschieben um endlich vieler Folgenglieder den Grenzwert nicht.
+			</p>
+		</article>
+
+		<article id="satz-rechenregeln" data-type="satz" class="script-block rounded-xl border border-blue-400/30 bg-blue-500/10 p-4 scroll-mt-32">
+
+			<p class="mb-2 text-sm font-semibold text-blue-300">
+				Satz
+			</p>
+
+			<h3 class="text-xl font-bold">
+				Rechenregeln für Grenzwerte
+			</h3>
+
+			<p class="mt-3 leading-7 text-slate-300">
+				Konvergente Folgen verhalten sich beim Rechnen genau so,
+				wie wir es intuitiv erwarten würden.
+			</p>
+		  
+			<p class="mt-3 text-slate-300">
+				Gilt
+				\(
+					a_n \to a
+				\)
+				und
+				\(
+				  b_n \to b,
+				\)
+				dann gilt auch
+			</p>
+
+			<div class="rounded-lg p-4">
+				<p class="semi-bold text-slate-100">
+					Summe
+					
+				</p>
+				\[
+					a_n + b_n \to a+b
+				\]
+			</div>
+			<div class="rounded-lg p-4">
+				<p class="semi-bold text-slate-100">
+					Produkt
+				</P>
+				\[
+					a_n b_n \to ab
+				\]
+			</div>
+			<div class="rounded-lg p-4">
+				<p class="semi-bold text-slate-100">
+					Kehrwert 
+					<span class="ml-2 text-sm text-slate-400">
+						Wichtig: Die Folge \((a_n)\) darf hierbei keine Nullfolge sein.
+					</span>				
+				</P>
+				\[
+					\frac{1}{a_n} \to \frac{1}{a}
+				\]
+			</div>
+			
+		</article>
+		
+		<article id="satz-komplexe-folgen" data-type="satz" class="script-block rounded-xl border border-blue-400/30 bg-blue-500/10 p-4 scroll-mt-32">
+			<p class="mb-2 text-sm font-semibold text-blue-300">
+				Satz
+			</p>
+
+			<h3 class="text-xl font-bold">
+				Konvergenz komplexer Folgen
+			</h3>
+
+			<p class="mt-3 leading-7 text-slate-300">
+				Bei komplexen Zahlen dürfen wir Realteil und Imaginärteil getrennt betrachten.
+			</p>
+
+			<div class="rounded-lg p-4">
+				<p class="mt-3 text-slate-300">
+					Konvergiert eine komplexe Folge, dann konvergieren auch ihr
+					Realteil, ihr Imaginärteil und ihr Betrag:
+					\[
+					\begin{aligned}
+					a_n \to a
+					\end{aligned}
+					\quad \Longrightarrow \quad
+					\left\{
+					\begin{aligned}
+					\operatorname{Re}(a_n) &\to \operatorname{Re}(a) \\
+					\operatorname{Im}(a_n) &\to \operatorname{Im}(a) \\
+					|a_n| &\to |a|
+					\end{aligned}
+					\right.
+					\]
+				</p>
+			</div>
+			<div class="rounded-lg p-4">
+				<p class="mt-3 text-slate-300">
+					Wenn Realteil und Imaginärteil jeweils konvergieren, dann konvergiert auch die komplexe Folge selbst:
+					\[
+					\left.
+					\begin{aligned}
+					\operatorname{Re}(a_n) \to b \\
+					\operatorname{Im}(a_n) \to c
+					\end{aligned}
+					\right\}
+					\quad \Longrightarrow \quad
+					a_n \to b + ic
+					\]
+				</p>
+			</div>
+		</article>
+		
+		<article id="satz-sandwich" data-type="satz" class="script-block rounded-xl border border-blue-400/30 bg-blue-500/10 p-4 scroll-mt-32">
+
+			<p class="mb-2 text-sm font-semibold text-blue-300">
+				Satz
+			</p>
+
+			<h3 class="text-xl font-bold">
+				Sandwichkriterium
+			</h3>
+
+			<p class="mt-3 leading-7 text-slate-300">
+				Liegt eine Folge dauerhaft zwischen zwei anderen Folgen,
+				die beide gegen denselben Grenzwert konvergieren,
+				dann muss auch die mittlere Folge gegen diesen Grenzwert konvergieren:
+				
+				\[
+					\left.
+					\begin{aligned}
+					a_n \le c_n \le b_n \\
+					a_n \to a \\
+					b_n \to a
+					\end{aligned}
+					\right\}
+					\quad \Longrightarrow \quad
+					c_n \to a
+				\]
+			</p>
+		</article>
+		
+		<p data-type="erklaerung" class="script-block leading-7 text-slate-300">
+			Bislang setzen alle Sätze in diesem Kapitel voraus, dass gewisse Folgen konvergieren. Im nächsten Abschnitt folgern wir hingegen die Existenz
+			eines Grenzwerts aus einfacher nachzuweisenden Eigenschaften einer Folge.
+        </p>
+		
+		<article id="def-monotonie" data-type="definition" class="script-block rounded-xl border border-pink-400/30 bg-pink-500/10 p-4 scroll-mt-32">
+
+			<p class="mb-2 text-sm font-semibold text-pink-300">
+				Definition
+			</p>
+
+			<h3 class="text-xl font-bold">
+				Monotone Folgen
+			</h3>
+
+			<p class="mt-3 leading-7 text-slate-300">
+				Eine reelle Folge kann mit wachsendem Index entweder größer,
+				kleiner oder abwechselnd beides werden.
+				Folgen mit einem gleichbleibenden Verhalten nennt man monotone Folgen.
+			</p>
+
+			<div class="mt-5 space-y-4">
+
+			<div class="rounded-lg p-4">
+				<p class="font-semibold text-slate-100">
+					Wachsende Folge
+				</p>
+
+				<p class="mt-2 text-slate-300">
+					Eine Folge heißt wachsend, wenn jedes Folgenglied mindestens so groß ist
+					wie das vorherige:
+				</p>
+
+				\[
+					a_{n+1} \ge a_n
+				\]
+
+				<p class="mt-3 text-sm text-slate-400">
+					Gilt sogar immer \(a_{n+1} > a_n\),
+					so heißt die Folge <em>strikt wachsend</em>.
+				</p>
+			</div>
+
+			<div class="rounded-lg p-4">
+				<p class="font-semibold text-slate-100">
+					Fallende Folge
+				</p>
+
+				<p class="mt-2 text-slate-300">
+					Eine Folge heißt fallend, wenn jedes Folgenglied höchstens so groß ist
+					wie das vorherige:
+				</p>
+
+				\[
+					a_{n+1} \le a_n
+				\]
+
+				<p class="mt-3 text-sm text-slate-400">
+					Gilt sogar immer \(a_{n+1} < a_n\),
+					so heißt die Folge <em>strikt fallend</em>.
+				</p>
+			</div>
+
+			<p class="mt-2 text-slate-300">
+				Wir nennen eine Folge  monoton,
+				wenn sie entweder wachsend oder fallend ist.
+			</p>
+
+			<p class="mt-3 text-slate-300">
+				Wächst eine Folge \(a_n\), so schreiben wir \(a_n \nearrow\). Fällt sie, so schreiben wir \(a_n \searrow\). Wenn außerdem \(a_n \to a\) gilt, so schreiben wir \(a_n \nearrow a\) bzw. \(a_n \searrow a\).
+			</p>
+			</div>
+		</article>
+		
+		<article id="bsp-monotonie" data-type="beispiel" class="script-block rounded-xl border border-yellow-400/30 bg-yellow-500/10 p-4 scroll-mt-32">
+			<p class="mb-2 text-sm font-semibold text-yellow-300">
+				Beispiel
+			</p>
+
+			<div class="rounded-lg p-4">
+				<p class="font-semibold text-slate-100">
+					Potenzfolgen
+				</p>
+
+				<p class="mt-3 leading-7 text-slate-300">
+					Für \(p > 0\) gilt:
+					\[
+						\left(n^{-p}\right)_{n \ge 1}
+						=
+						\left(\frac{1}{n^p}\right)_{n \ge 1}
+					\]
+					ist strikt fallend,
+					denn mit wachsendem \(n\) werden die Werte immer kleiner.
+					\[
+						\left(n^p\right)_{n \ge 1}
+					\]
+					ist dagegen strikt wachsend.
+				</p>
+			</div>
+			<div class="my-5 h-px bg-yellow-300/20"></div>
+			<div class="rounded-lg p-4">
+				<p class="font-semibold text-slate-100">
+					Eine Folge direkt vergleichen
+				</p>
+
+				<p class="mt-3 text-slate-300">
+					Betrachte die Folge
+					\[
+						a_n = \frac{n}{2n+1}
+					\]
+					Um zu zeigen, dass die Folge wächst,
+					vergleicht man zwei aufeinanderfolgende Folgenglieder:
+					\[
+						a_{n+1}
+						=
+						\frac{n+1}{2(n+1)+1}
+						=
+						\frac{n+1}{2n+3}
+					\]
+					Nun untersucht man:
+					\[
+						\frac{n+1}{2n+3}
+						>
+						\frac{n}{2n+1}
+					\]
+      
+					Da alle Nenner positiv sind,
+					darf man kreuzmultiplizieren:
+      
+					\[
+						(n+1)(2n+1)
+						>
+						n(2n+3)
+					\]
+ 
+					Ausmultiplizieren liefert:
+					\[
+					  2n^2 + 3n + 1
+					  >
+					  2n^2 + 3n
+					\]
+					Nach Kürzen bleibt:
+					\[
+					  1 > 0
+					\]
+					Diese Aussage ist immer wahr.
+					Also gilt
+					\[
+					  a_{n+1} > a_n
+					\]
+					Die Folge ist also strikt wachsend.
+				</p>
+			</div>
+		</article>
+	</section>
 </main>
-
-
 
 <footer class="mt-12 border-t border-slate-800">
   <div class="mx-auto max-w-7xl px-6 py-8 text-sm text-slate-400">
@@ -281,7 +839,6 @@
 </footer>
 
 <script>
-// make in-panel anchor scrolling (so tasks don't move)
 document.querySelectorAll('#aufgaben a[href^="#"]').forEach(link => {
   link.addEventListener('click', (e) => {
     const targetId = link.getAttribute('href');
@@ -300,6 +857,7 @@ document.querySelectorAll('#aufgaben a[href^="#"]').forEach(link => {
     }
   });
 });
+
 const exercisesPanel = document.getElementById("aufgaben");
 const scriptPanel = document.getElementById("skript");
 const navBothBtn = document.getElementById("navBoth");
@@ -404,9 +962,10 @@ btnExercises.addEventListener("click", toggleExercises);
 btnScript.addEventListener("click", toggleScript);
 
 const showAllScriptBtn = document.getElementById("showAllScript");
-const filterButtons = document.querySelectorAll(".script-filter");
+const scriptFilterButtons = document.querySelectorAll(".script-filter");
+const filterButtons = document.querySelectorAll(".filter");
 const scriptBlocks = document.querySelectorAll(".script-block");
-const filterTypes = ["definition", "satz", "beweis", "beispiel"];
+const filterTypes = ["definition", "satz", "beweis", "beispiel", "bemerkung"];
 const activeTypes = new Set(filterTypes);
 let allMode = true;
 
@@ -424,6 +983,10 @@ function updateScriptVisibility() {
   filterButtons.forEach((button) => {
     setButtonActive(button, activeTypes.has(button.dataset.type));
   });
+  
+  scriptFilterButtons.forEach((button) => {
+    setButtonActive(button, activeTypes.has(button.dataset.type));
+  });
 
   scriptBlocks.forEach((block) => {
     const type = block.dataset.type;
@@ -434,9 +997,14 @@ function updateScriptVisibility() {
     }
 
     if (allMode) {
-      block.classList.remove("content-hidden");
-      return;
-    }
+	  if (type === "erklaerung" || type === "kapitel") {
+		block.classList.remove("content-hidden");
+		return;
+	}
+
+  block.classList.toggle("content-hidden", !activeTypes.has(type));
+  return;
+}
 
     block.classList.toggle("content-hidden", !activeTypes.has(type));
   });
@@ -449,7 +1017,7 @@ showAllScriptBtn.addEventListener("click", () => {
   updateScriptVisibility();
 });
 
-filterButtons.forEach((button) => {
+scriptFilterButtons.forEach((button) => {
   button.addEventListener("click", () => {
     allMode = false;
     const type = button.dataset.type;
@@ -464,8 +1032,37 @@ filterButtons.forEach((button) => {
   });
 });
 
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const type = button.dataset.type;
+
+    if (activeTypes.has(type)) {
+      activeTypes.delete(type);
+    } else {
+      activeTypes.add(type);
+    }
+
+    updateScriptVisibility();
+  });
+});
+
+function renderMath() {
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true }
+      ],
+      throwOnError: false
+    });
+  }
+}
+
 showBoth();
 updateScriptVisibility();
+window.addEventListener("load", renderMath);
 </script>
 
 </body>
