@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>annication</title>
+
+    <!-- Style -->
+    <script src="/scripts/theme.js"></script>
+    <link rel="stylesheet" href="/styles/variables.css">
+    <link rel="stylesheet" href="/styles/global.css">
+    <link rel="stylesheet" href="/styles/components.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
+    <link rel="shortcut icon" href="/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+
+    <!-- Mathematics -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+    <!-- Syntax highlighting -->
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/prism.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-python.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-java.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-c.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/prismjs@1.30.0/components/prism-cpp.min.js"></script>
+
+    <!-- Diagrams -->
+    <script defer src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+
+    <!-- Data -->
+    <script src="/scripts/topic-loader.js" defer></script>
+    <script src="/scripts/course-loader.js" defer></script>
+
+    <!-- Rendering -->
+    <script type="module" src="/scripts/annication-markdown.js"></script>
+
+    <!-- Components -->
+    <script src="/scripts/components/content-box.js" defer></script>
+    <script src="/scripts/components/page-title.js" defer></script>
+    <script src="/scripts/components/site-header.js" defer></script>
+    <script src="/scripts/components/site-footer.js" defer></script>
+    <script type="module" src="/scripts/components/table-of-contents.js"></script>
+
+    <script type="module" src="/scripts/topic-page.js"></script>
+
+</head>
+
+<body>
+    <site-header></site-header>
+
+    <table-of-contents></table-of-contents>
+
+    <main class="topic-main">
+        <page-title></page-title>
+        <div id="topic"></div>
+    </main>
+
+    <site-footer></site-footer>
+</body>
+</html>

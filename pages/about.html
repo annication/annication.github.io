@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Über annication</title>
+
+    <!-- Styles -->
+    <script src="/scripts/theme.js"></script>
+    <link rel="stylesheet" href="/styles/variables.css">
+    <link rel="stylesheet" href="/styles/global.css">
+    <link rel="stylesheet" href="/styles/components.css">
+    <link rel="stylesheet" href="/styles/about.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
+    <link rel="shortcut icon" href="/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+
+    <!-- Components -->
+    <script src="/scripts/components/site-header.js" defer></script>
+    <script src="/scripts/components/site-footer.js" defer></script>
+</head>
+
+<body>
+    <site-header></site-header>
+
+    <main class="about-page">
+        <article class="about-article">
+
+            <header class="about-header">
+                <p class="about-eyebrow">DAS PROJEKT</p>
+                <h1>Über anni<span class="about-cation">cation</span></h1>
+            </header>
+
+            <div class="about-content">
+                <p>
+                    annication ist eine kostenlose Lernplattform für
+                    Informatik und Mathematik.
+                    Sie umfasst in ihrem Kern aufbereitete Mitschriften,
+                    die im Laufe meines Informatikstudiums (mit Nebenfach
+                    Mathematik) entstehen. Damit ist annication sowohl
+                    mein persönlicher Wissensspeicher als auch eine
+                    Möglichkeit, anderen beim Erlernen dieses Wissens
+                    zu helfen.
+                </p>
+
+                <p>
+                    Auf annication sind Inhalte zunächst wie in der
+                    Universität üblich in
+                    <a href="/#courses">Kursen</a>
+                    /Modulen und darunter in Kapiteln
+                    organisiert (top down). Über Verknüpfungen zwischen
+                    den Themen lassen sich in der
+                    <a href="/#graph">Graphennavigation</a>
+                    außerdem Zusammenhänge entdecken, die über den
+                    eigentlichen Lernpfad eines Kurses hinausgehen
+                    (bottom up).
+                </p>
+
+                <h2>Ein Blick hinter die Kulissen</h2>
+
+                <p>
+                    Da du hier auf annication unterwegs bist, gehe ich davon aus, dass du
+                    Informatiker oder zumindest informatisch interessiert
+                    bist :) Deshalb möchte ich dir auch ein bisschen
+                    über den technischen Aufbau von annication erzählen.
+                </p>
+
+                <p>
+                    Die Lerninhalte liegen als Markdown-Dateien
+                    (<code>.md</code>) vor. Markdown ist eine weit
+                    verbreitete, einfache
+                    <a href="https://de.wikipedia.org/wiki/Auszeichnungssprache" target="_blank" rel="noopener noreferrer">Auszeichnungssprache</a>.
+
+                </p>
+
+                <p>
+                    Damit lassen sich Texte
+                    strukturieren, ohne sie an eine bestimmte Anwendung
+                    zu binden.
+                </p>
+
+                <p>
+                    Die Website selbst funktioniert im Grunde wie ein
+                    Markdown-Renderer mit ein bisschen Schnickschnack:
+                    Sie stellt die Dateien nach meinen Vorstellungen
+                    dar und ergänzt sie um die Kursnavigation, die
+                    Graphennavigation, die Fortschrittskontrolle und
+                    zukünftig vielleicht noch ein paar andere schicke
+                    Funktionen.
+                </p>
+
+                <p>
+                    Das Tolle daran ist, dass du nicht auf annication
+                    angewiesen bist, um die Inhalte zu lesen. Du kannst
+                    die Markdown-Dateien aus meinem öffentlichen
+                    <a href="https://github.com/annication/annication.github.io/content" target="_blank" rel="noopener noreferrer">GitHub-Repository</a>
+                    herunterladen und beispielsweise
+                    in deine eigene
+                    <a href="https://obsidian.md" target="_blank" rel="noopener noreferrer">Obsidian</a>-Sammlung
+                    übernehmen.
+                    Dort kannst du sie nach deinen Vorstellungen
+                    organisieren, ergänzen und mit deinen eigenen
+                    Notizen verknüpfen.
+                    <em>Mi casa es su casa.</em>
+                </p>
+
+                <h2>annication auf YouTube</h2>
+
+                <p>
+                    annication gibt es nicht nur als Website, sondern
+                    auch als
+                    <a href="https://www.youtube.com/@annication">YouTube-Kanal</a>.
+                    Dort veröffentliche ich zukünftig ergänzende
+                    Lerninhalte, Erklärungen und insbesondere
+                    Lösungsvorschläge zu Aufgaben.
+                </p>
+
+                <p>
+                    Während sich die Website vor allem zum Nachlesen,
+                    Nachschlagen und eigenständigen Durcharbeiten eignet
+                    (ähnlich wie ein smartes Vorlesungsskript), bietet
+                    YouTube die Möglichkeit, Lösungswege Schritt für
+                    Schritt nachzuvollziehen (ähnlich wie ein Tutorium
+                    oder eine gute Vorlesung ;).
+                </p>
+
+                <p>
+                    Beide Angebote sollen sich ergänzen. Wo es passende
+                    Videos gibt, sollen diese möglichst direkt mit den
+                    entsprechenden Themen oder Aufgaben auf der Website
+                    verknüpft werden.
+                </p>
+
+                <h2>Von Menschen für Menschen</h2>
+
+                <p>
+                    Aus gegebenem Anlass: Sicherlich hast du schon einmal
+                    LLMs (wie ChatGPT, Gemini oder Claude) benutzt und
+                    vielleicht auch schon festgestellt (oder dir
+                    zumindest gedacht), dass solche Modelle ziemlich
+                    gut darin sind, eine Markdown-Datei mit einer
+                    Erklärung zu Graphen, Determinanten,
+                    Aussagenlogik oder so ziemlich jedem anderen Thema
+                    (einschließlich aller Themen, die auf annication
+                    behandelt werden) zu erstellen.
+                </p>
+
+                <p>
+                    Vielleicht fragst du dich darum, ob ich zum Erstellen
+                    meiner Inhalte KI verwende. Die Antwort darauf ist
+                    ein entschiedenes <strong>Nein</strong>.
+                </p>
+
+                <p class="about-statement">
+                    Alle Inhalte auf annication sind ausschließlich von
+                    mir (einem Menschen ;) erstellt – von einem Menschen
+                    verstanden und aufgeschrieben, um von einem Menschen
+                    verstanden zu werden.
+                </p>
+
+                <p>
+                    Dahinter steht die Überzeugung, dass jeder, bevor
+                    er oder sie sich das reine Fachwissen angeeignet hat
+                    (das einer KI ohne Frage mindestens genauso
+                    umfangreich zur Verfügung steht), den zutiefst
+                    menschlichen Weg zum Verständnis dieses Fachwissens
+                    gegangen ist.
+                </p>
+
+                <p>
+                    Dabei hat er oder sie Missverständnisse beseitigt,
+                    Fragen beantwortet und Schwierigkeiten überwunden,
+                    die auch anderen beim Lernen des gleichen Inhalts
+                    begegnen können. Die Hindernisse und die damit
+                    verbundenen Erkenntnisse, die ich auf meinem Weg
+                    zum Verstehen gesammelt habe, fließen direkt und
+                    authentisch in die Inhalte auf annication ein und
+                    bieten den Mehrwert gegenüber der Erklärung einer LLM.
+                </p>
+
+                <h2>Fehler gefunden?</h2>
+
+                <p>
+                    Eng damit verbunden ist, dass mir als Mensch
+                    (vertrau, bin ich wirklich ;) auch menschliche
+                    Fehler unterlaufen. Wenn dir ein solcher Fehler
+                    (in den Lerninhalten oder in meinem Quellcode)
+                    auffällt, dann scheue dich bitte nicht, mir diesen
+                    über
+                    <a href="mailto:mail@annication.de">mail@annication.de</a>
+                    mitzuteilen.
+                </p>
+
+                <p>
+                    Das Projekt ist außerdem öffentlich auf
+                    <a href="https://github.com/annication/annication.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    verfügbar. Auch dort kannst du Probleme melden.
+                    Ich freue mich über deine Unterstützung.
+                </p>
+
+                <p>
+                    P.S.: Ich bin (wie gesagt) keine LLM und besitze
+                    darum echte Gefühle – ein Mindestmaß an
+                    Freundlichkeit und Respekt in jeder Kommunikation
+                    weiß ich darum zu schätzen.
+                </p>
+            </div>
+        </article>
+    </main>
+    <site-footer></site-footer>
+</body>
+</html>

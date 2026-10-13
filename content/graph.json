@@ -1,0 +1,18 @@
+{
+  "nodes": [
+    {
+      "id": "MarkdownTest",
+      "title": "MarkdownTest"
+    }
+  ],
+  "edges": [],
+  "courses": [
+    {
+      "id": "example-course",
+      "title": "Beispielkurs",
+      "topicIds": [
+        "MarkdownTest"
+      ]
+    }
+  ]
+}

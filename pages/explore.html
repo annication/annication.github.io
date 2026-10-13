@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Entdecken - annication</title>
+
+    <!-- Styles -->
+    <script src="/scripts/theme.js"></script>
+    <link rel="stylesheet" href="/styles/variables.css">
+    <link rel="stylesheet" href="/styles/global.css">
+    <link rel="stylesheet" href="/styles/components.css">
+    <link rel="stylesheet" href="/styles/explore.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
+    <link rel="shortcut icon" href="/favicon/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/favicon/site.webmanifest">
+
+    <!-- Components -->
+    <script src="/scripts/components/site-header.js" defer></script>
+    <script type="module" src="/scripts/components/topic-graph.js">
+</script>
+</head>
+<body class="explore-layout">
+    <site-header></site-header>
+
+    <main class="explore-main">
+        <section class="explore-page">
+            <div class="explore-heading">
+                <h1>Entdecken</h1>
+                <p>Erkunde Zusammenhänge zwischen Themen.</p>
+            </div>
+
+            <topic-graph></topic-graph>
+        </section>
+    </main>
+</body>
+</html>
