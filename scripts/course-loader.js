@@ -49,3 +49,38 @@ function findTopicInCourse(topicId) {
 
     return null;
 }
+
+function findNextTopicInCourse(topicId) {
+    if (!window.courseData) {
+        return null;
+    }
+
+    const chapters = window.courseData.chapters;
+    const position = findTopicInCourse(topicId);
+
+    if (!position) {
+        return null;
+    }
+
+    const { chapterIndex, pageIndex } = position;
+    const chapter = chapters[chapterIndex];
+
+    // Nächstes Topic innerhalb desselben Kapitels
+    if (pageIndex + 1 < chapter.pages.length) {
+        return chapter.pages[pageIndex + 1];
+    }
+
+    // Erstes Topic des nächsten nichtleeren Kapitels
+    for (
+        let index = chapterIndex + 1;
+        index < chapters.length;
+        index++
+    ) {
+        if (chapters[index].pages.length > 0) {
+            return chapters[index].pages[0];
+        }
+    }
+
+    // Letztes Topic des Kurses
+    return null;
+}

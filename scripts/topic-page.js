@@ -79,12 +79,53 @@ async function loadPage() {
         }
     );
 
+    
+    function renderNextTopicButton(container, currentTopicId) {
+        const nextTopic = findNextTopicInCourse(currentTopicId);
+
+        if (!nextTopic) {
+            return;
+        }
+
+        const link = document.createElement("a");
+        link.className = "next-topic-button";
+
+        const params = new URLSearchParams({
+            id: nextTopic.id,
+            course: courseId
+        });
+
+        link.href = `/pages/topic.html?${params.toString()}`;
+
+        const text = document.createElement("span");
+        text.textContent = "Weiter";
+
+        const arrow = document.createElement("span");
+        arrow.className = "next-topic-arrow";
+        arrow.textContent = "→";
+        arrow.setAttribute("aria-hidden", "true");
+
+        link.appendChild(text);
+        link.appendChild(arrow);
+
+        container.appendChild(link);
+    }
+
+
     // Topic darstellen
     topicContainer.appendChild(markdownElement);
     markdownElement.renderTopic(topicData);
 
-    // Fortschrittsmarkierung erstellen
-    renderProgressCheckbox(topicContainer);
+    const actions = document.createElement("div");
+    actions.className = "topic-actions";
+
+    topicContainer.appendChild(actions);
+
+    renderProgressCheckbox(actions);
+
+    if (coursePosition) {
+        renderNextTopicButton(actions, topicId);
+    }
 }
 
 
@@ -97,7 +138,7 @@ function renderProgressCheckbox(container) {
     checkbox.checked = isTopicCompleted(topicId);
 
     const text = document.createElement("span");
-    text.textContent = "Da hat's Klick gemacht!";
+    text.textContent = "Bei mir hat's Klick gemacht!";
 
     checkbox.addEventListener("change", () => {
         const saved = setTopicCompleted(

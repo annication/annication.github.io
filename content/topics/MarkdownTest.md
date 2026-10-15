@@ -6,9 +6,9 @@ Diese Seite testet die Markdown-Funktionen von **annication**.
 
 Normaler Text, **fetter Text**, *kursiver Text* und `inlineCode()`.
 
-Ein Wikilink: [[Graph]].
+Ein Wikilink: [[Minimum]].
 
-Ein Wikilink mit Anzeigename: [[Graph|Graphentheorie]].
+Ein Wikilink mit Anzeigename: [[Minimum|das hier führt zum Minimum]].
 
 ## Mathematische Formeln
 
@@ -123,8 +123,8 @@ flowchart TD
 
 ## Beispiel mit Bild
 
-> [!example] Graphendarstellung
-> Die folgende Abbildung zeigt einen Graphen.
+> [!example] Rakete
+> Die folgende Abbildung zeigt eine Rakete.
 >
 > ![Graph](../assets/example/example.png)
 

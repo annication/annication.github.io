@@ -70,21 +70,37 @@ annication-markdown pre code {
     background: none;
 }
 
+.content-box:not(.theorem, .definition, .proof)  {
+    border-left-color: color-mix(
+        in srgb,
+        var(--pink) 25%,
+        transparent
+    );
+}
+
+.content-box:not(.theorem, .definition, .proof)  .content-box-type {
+    font-size: 0.7rem;
+    opacity: 0.6;
+}
+
+.content-box:not(.theorem, .definition, .proof)  .content-box-content {
+    font-size: 0.9rem;
+}
 
 /* =========================================================
-   COLLAPSIBLE CONTENT BOX: QUESTION
+   COLLAPSIBLE CONTENT BOXES
    ========================================================= */
 
-.content-box.question > summary {
+.content-box:is(details) > summary {
     cursor: pointer;
     list-style: none;
 }
 
-.content-box.question > summary::-webkit-details-marker {
+.content-box:is(details) > summary::-webkit-details-marker {
     display: none;
 }
 
-.content-box.question .content-box-title {
+.content-box:is(details) .content-box-title {
     flex: 1;
 }
 
@@ -95,16 +111,16 @@ annication-markdown pre code {
     transition: transform 0.2s ease;
 }
 
-.content-box.question[open] .content-box-chevron {
+.content-box:is(details)[open] .content-box-chevron {
     transform: rotate(180deg);
 }
 
-.content-box.question > summary:focus-visible {
+.content-box:is(details) > summary:focus-visible {
     outline: 0.125rem solid var(--pink);
     outline-offset: 0.25rem;
 }
 
-.content-box.question > .content-box-content {
+.content-box:is(details) > .content-box-content {
     padding-top: 0.75rem;
 }
 
@@ -567,37 +583,84 @@ annication-markdown .mermaid .edgeLabel p {
    ========================================================= */
 
 .topic-progress {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.75rem;
 
     width: fit-content;
     margin-top: 2rem;
-    padding: 1rem 1.25rem;
+    padding: 0.75rem 1.25rem;
 
-    border: 1px solid var(--border);
-    border-radius: 0.75rem;
+    border: 0.0625rem solid var(--border);
+    border-radius: 999rem;
 
-    background: var(--surface);
+    background: transparent;
     color: var(--text);
+
+    font-size: 0.875rem;
 
     cursor: pointer;
     user-select: none;
+
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.topic-progress:hover {
+    border-color: var(--pink);
+    background: color-mix(in srgb, var(--pink) 5%, transparent);
+}
+
+.topic-progress:has(input:checked) {
+    border-color: var(--pink);
+    background: color-mix(in srgb, var(--pink) 10%, transparent);
+}
+
+.topic-progress:focus-within {
+    outline: 0.125rem solid var(--pink);
+    outline-offset: 0.1875rem;
 }
 
 .topic-progress input {
-    width: 1.25rem;
-    height: 1.25rem;
+    appearance: none;
+
+    display: grid;
+    place-items: center;
+
+    width: 1.125rem;
+    height: 1.125rem;
     margin: 0;
 
-    accent-color: var(--pink);
+    border: 0.09375rem solid var(--border);
+    border-radius: 50%;
+
+    background: transparent;
+
     cursor: pointer;
+    flex-shrink: 0;
+}
+
+.topic-progress input:checked {
+    border-color: var(--pink);
+    background: var(--pink);
+}
+
+.topic-progress input:checked::after {
+    content: "✓";
+    color: var(--background);
+    font-size: 0.75rem;
+    font-weight: 700;
 }
 
 .topic-progress span {
-    font-weight: 600;
+    font-weight: 500;
 }
 
+.topic-progress:has(input:checked) span {
+    color: var(--pink);
+}
 
 /* Kursfortschritt */
 
@@ -644,4 +707,85 @@ annication-markdown .mermaid .edgeLabel p {
 
 .toc-topic-check[hidden] {
     display: none;
+}
+
+
+/* =========================================================
+   NEXT TOPIC NAVIGATION
+   ========================================================= */
+
+.next-topic-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+
+    width: fit-content;
+    margin-top: 2rem;
+    padding: 0.75rem 1.5rem;
+
+    border: 0.0625rem solid var(--pink);
+    border-radius: 999rem;
+
+    background: var(--pink);
+    color: var(--background);
+
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.next-topic-button:hover {
+    background: color-mix(
+        in srgb,
+        var(--pink) 85%,
+        var(--background)
+    );
+
+    transform: translateX(0.1875rem);
+}
+
+.next-topic-button:focus-visible {
+    outline: 0.125rem solid var(--pink);
+    outline-offset: 0.1875rem;
+}
+
+.next-topic-arrow {
+    font-size: 1.125rem;
+}
+
+/* =========================================================
+   TOPIC ACTIONS
+   ========================================================= */
+
+.topic-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+
+    margin-top: 3rem;
+}
+
+.topic-actions .topic-progress,
+.topic-actions .next-topic-button {
+    box-sizing: border-box;
+
+    min-height: 2.875rem;
+    margin-top: 0;
+    padding: 0.75rem 1.25rem;
+
+    border-radius: 999rem;
+
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.topic-actions .next-topic-button {
+    margin-left: auto;
 }

@@ -1,3 +1,4 @@
+
 class ContentBox extends HTMLElement {
     connectedCallback() {
         const type = this.getAttribute("type");
@@ -10,7 +11,9 @@ class ContentBox extends HTMLElement {
             lemma: "LEMMA",
             proof: "BEWEIS",
             example: "BEISPIEL",
-            question: "HÄ?"
+            question: "MIT ANDEREN WORTEN",
+            quote: "ÜBERSETZUNG",
+            note: "BEMERKUNG"
         };
 
         const typeName = typeNames[type];
@@ -19,11 +22,17 @@ class ContentBox extends HTMLElement {
             return;
         }
 
-        if (type === "question") {
+        const isCollapsible =
+            this.hasAttribute("open") ||
+            this.hasAttribute("closed");
+
+        if (isCollapsible) {
+            const isOpen = this.hasAttribute("open");
+
             this.innerHTML = `
                 <details
-                    class="content-box question"
-                    ${this.hasAttribute("open") ? "open" : ""}
+                    class="content-box ${type}"
+                    ${isOpen ? "open" : ""}
                 >
                     <summary class="content-box-header">
                         <span class="content-box-type">
