@@ -391,13 +391,13 @@ class AnnicationMarkdown extends HTMLElement {
             <pre><code class="language-${language}">${escapedCode}</code></pre>
         `;
     }
-
-
+    
+    
     renderCallout(block) {
         const lines = block.split("\n");
 
         const headerMatch = lines[0].match(
-            /^> \[!(\w+)\]([+-])?(?: (.+))?$/
+            /^>\s+\[!(\w+)\]([+-])?(?:\s+(.+))?\s*$/
         );
 
         if (!headerMatch) {
@@ -420,7 +420,9 @@ class AnnicationMarkdown extends HTMLElement {
             "lemma",
             "proof",
             "example",
-            "question"
+            "question",
+            "quote",
+            "note"
         ];
 
         if (!supportedCallouts.includes(type)) {
@@ -430,13 +432,15 @@ class AnnicationMarkdown extends HTMLElement {
         return `
             <content-box
                 type="${type}"
-                title="${this.escapeHtml(title)}"
-                ${type === "question" && fold === "+" ? "open" : ""}
+                title="${this.escapeHtml(this.renderInline(title))}"
+                ${fold === "+" ? "open" : ""}
+                ${fold === "-" ? "closed" : ""}
             >
                 ${this.renderBlocks(content)}
             </content-box>
         `;
     }
+
 
     renderInline(text) {
         return parseInlineSegments(text)

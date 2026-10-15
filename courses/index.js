@@ -3,6 +3,11 @@ window.courseCatalog = [
         id: "example-course",
         title: "Beispielkurs",
         description: "Dies ist ein Beispielkurs, der die Struktur und Funktionsweise von Kursen demonstriert."
+    },
+    {
+        id: "automated-reasoning",
+        title: "Automatisches Schließen von Beweisen",
+        description: "Beweissysteme und automatisiertes Schließen."
     }
     /*
     {
@@ -31,10 +36,6 @@ window.courseCatalog = [
         title: "Funktionale Programmierung",
         description: "Funktionen höherer Ordnung, Rekursion und Unveränderlichkeit."
     },
-    {
-        id: "automated-reasoning",
-        title: "Logik",
-        description: "Formale Logik, Beweissysteme und automatisiertes Schließen."
-    }
+    
     */
 ];
