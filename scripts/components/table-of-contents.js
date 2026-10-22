@@ -28,13 +28,7 @@ class TableOfContents extends HTMLElement {
                 if (page.type !== "topic" && page.type !== "course-topic") {
                     throw new Error(`Ungültiger Topic-Typ: ${page.type}`);
                 }
-                let title = page.id;
-                try {
-                    const topic = await loadContent(page.id, page.type, courseId);
-                    title = topic.metadata.title ?? page.id;
-                } catch (error) {
-                    console.warn(`Inhalt konnte nicht geladen werden: ${page.id}`, error);
-                }
+                const title = page.title ?? page.id;
 
                 const progressId = page.type === "topic"
                     ? page.id

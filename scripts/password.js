@@ -13,7 +13,7 @@ const submitButton = form.querySelector('input[type="submit"]');
 
 const PASSWORD_STORAGE_KEY = "annication-password";
 const AUTH_FILE = "/auth/check.enc";
-const AUTH_CHECK_VALUE = "annication-auth-v1";
+const AUTH_CHECK_VALUE = "Die ist eine Passwortkontrolle auf annication";
 
 async function checkPassword(password) {
     const response = await fetch(AUTH_FILE);
