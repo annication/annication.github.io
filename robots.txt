@@ -1,0 +1,36 @@
+# KI-Crawler
+User-agent: GPTBot
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-SearchBot
+Disallow: /
+
+User-agent: Claude-User
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+# Andere Crawler dürfen die öffentlichen Seiten finden,
+# aber keine Inhaltsdateien abrufen.
+User-agent: *
+Disallow: /content/
+Disallow: /courses/
+Disallow: /auth/
+Disallow: /pages/topic.html
+Disallow: /pages/explore.html

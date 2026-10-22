@@ -6,13 +6,18 @@ class TopicGraph extends HTMLElement {
         this.textContent = "Wissensgraph wird geladen …";
 
         try {
-            const response = await fetch("/content/graph.json");
+            const password = sessionStorage.getItem("annication-password");
 
-            if (!response.ok) {
-                throw new Error("Graph konnte nicht geladen werden.");
+            if (!password) {
+                window.location.replace("/password.html");
+                return;
             }
 
-            this.graph = await response.json();
+            this.graph = await ContentCrypto.loadJSON(
+                "/content/graph.enc",
+                password
+            );
+
             this.selectedTopicId = null;
             this.selectedCourseId = null;
 

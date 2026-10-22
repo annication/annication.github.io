@@ -1,26 +1,38 @@
-
 import { getCourseProgress } from "./components/progress.js";
 
 async function renderCourseCards() {
     const container = document.getElementById("course-grid");
 
-    if (!container || !window.courseCatalog) {
+    if (!container) {
+        return;
+    }
+
+    const password = sessionStorage.getItem("annication-password");
+
+    if (!password) {
+        window.location.replace("/password.html");
         return;
     }
 
     let graphCourses = [];
 
     try {
-        const response = await fetch("/content/graph.json");
+        window.courseCatalog = await ContentCrypto.loadJSON(
+            "/courses/catalog.enc",
+            password
+        );
 
-        if (!response.ok) {
-            throw new Error("Graphdaten konnten nicht geladen werden.");
-        }
+        const graph = await ContentCrypto.loadJSON(
+            "/content/graph.enc",
+            password
+        );
 
-        const graph = await response.json();
         graphCourses = graph.courses ?? [];
     } catch (error) {
-        console.error("Kursfortschritt konnte nicht geladen werden:", error);
+        console.error("Kursdaten konnten nicht entschlüsselt werden:", error);
+        sessionStorage.removeItem("annication-password");
+        window.location.replace("/password.html");
+        return;
     }
 
     container.innerHTML = "";

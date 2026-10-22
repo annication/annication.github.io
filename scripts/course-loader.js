@@ -1,86 +1,54 @@
-function loadCourse(courseId) {
-    return new Promise((resolve, reject) => {
-        const script = document.createElement("script");
+async function loadCourse(courseId) {
+    const password = sessionStorage.getItem("annication-password");
 
-        script.src = `/courses/${courseId}.js`;
+    if (!password) {
+        window.location.replace("/password.html");
+        throw new Error("Keine aktive Sitzung.");
+    }
 
-        script.onload = resolve;
+    const url = `/courses/${encodeURIComponent(courseId)}.enc`;
 
-        script.onerror = () => {
-            reject(
-                new Error(`Kurs konnte nicht geladen werden: ${courseId}`)
-            );
-        };
-
-        document.head.appendChild(script);
-    });
+    window.courseData = await ContentCrypto.loadJSON(url, password);
 }
 
 
-function findTopicInCourse(topicId) {
-    if (!window.courseData) {
-        return null;
+function validateCoursePage(page) {
+    if (page.type !== "topic" && page.type !== "course-topic") {
+        throw new Error(`Ungültiger Topic-Typ bei "${page.id}": ${page.type}`);
     }
+}
 
-    for (
-        let chapterIndex = 0;
-        chapterIndex < window.courseData.chapters.length;
-        chapterIndex++
-    ) {
+function findPageInCourse(pageId) {
+    if (!window.courseData) return null;
+    for (let chapterIndex = 0; chapterIndex < window.courseData.chapters.length; chapterIndex++) {
         const chapter = window.courseData.chapters[chapterIndex];
-
-        for (
-            let pageIndex = 0;
-            pageIndex < chapter.pages.length;
-            pageIndex++
-        ) {
+        for (let pageIndex = 0; pageIndex < chapter.pages.length; pageIndex++) {
             const page = chapter.pages[pageIndex];
-
-            if (page.id === topicId) {
-                return {
-                    chapterIndex,
-                    pageIndex,
-                    chapter,
-                    page
-                };
-            }
+            validateCoursePage(page);
+            if (page.id === pageId) return { chapterIndex, pageIndex, chapter, page };
         }
     }
-
     return null;
 }
 
-function findNextTopicInCourse(topicId) {
-    if (!window.courseData) {
-        return null;
-    }
-
+function findNextPageInCourse(pageId) {
+    if (!window.courseData) return null;
     const chapters = window.courseData.chapters;
-    const position = findTopicInCourse(topicId);
-
-    if (!position) {
-        return null;
-    }
-
+    const position = findPageInCourse(pageId);
+    if (!position) return null;
     const { chapterIndex, pageIndex } = position;
     const chapter = chapters[chapterIndex];
-
-    // Nächstes Topic innerhalb desselben Kapitels
     if (pageIndex + 1 < chapter.pages.length) {
-        return chapter.pages[pageIndex + 1];
+        const next = chapter.pages[pageIndex + 1];
+        validateCoursePage(next);
+        return next;
     }
-
-    // Erstes Topic des nächsten nichtleeren Kapitels
-    for (
-        let index = chapterIndex + 1;
-        index < chapters.length;
-        index++
-    ) {
+    for (let index = chapterIndex + 1; index < chapters.length; index++) {
         if (chapters[index].pages.length > 0) {
-            return chapters[index].pages[0];
+            const next = chapters[index].pages[0];
+            validateCoursePage(next);
+            return next;
         }
     }
-
-    // Letztes Topic des Kurses
     return null;
 }

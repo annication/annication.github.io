@@ -1,14 +1,17 @@
-import { readdir, readFile, writeFile, access } from "node:fs/promises";
+
+import { readdir, readFile, writeFile, access, mkdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
-import vm from "node:vm";
 
 import { extractWikiLinks } from "../scripts/markdown-syntax.mjs";
 
 const projectRoot = fileURLToPath(new URL("../", import.meta.url));
-const topicsDirectory = path.join(projectRoot, "content", "topics");
-const coursesDirectory = path.join(projectRoot, "courses");
-const outputFile = path.join(projectRoot, "content", "graph.json");
+const contentRoot = path.resolve(projectRoot, "../annication-content");
+
+const topicsDirectory = path.join(contentRoot, "content", "topics");
+const coursesDirectory = path.join(contentRoot, "courses");
+const courseTopicsDirectory = path.join(contentRoot, "content", "course-topics");
+const outputFile = path.join(contentRoot, "build", "graph.json");
 
 function removeFrontmatter(markdown) {
     return markdown.replace(/^---\s*\r?\n[\s\S]*?\r?\n---\s*\r?\n?/, "");
@@ -34,35 +37,14 @@ function removeCodeBlocks(markdown) {
     return result.join("\n");
 }
 
-// Liest Daten aus einer bestehenden Kurs-JavaScript-Datei.
-// Die Datei wird in einem separaten Kontext ausgeführt.
-async function readCourseScript(filename, propertyName) {
+async function readJSON(filename) {
     const source = await readFile(filename, "utf8");
-
-    const context = {
-        window: {}
-    };
-
-    vm.runInNewContext(source, context, {
-        filename,
-        timeout: 1000
-    });
-
-    const data = context.window[propertyName];
-
-    if (!data) {
-        throw new Error(
-            `${filename} definiert window.${propertyName} nicht.`
-        );
-    }
-
-    return data;
+    return JSON.parse(source);
 }
 
 async function loadCourses(topicIds) {
-    const catalog = await readCourseScript(
-        path.join(coursesDirectory, "index.js"),
-        "courseCatalog"
+    const catalog = await readJSON(
+        path.join(coursesDirectory, "catalog.json")
     );
 
     const courses = [];
@@ -70,7 +52,7 @@ async function loadCourses(topicIds) {
     for (const entry of catalog) {
         const courseFile = path.join(
             coursesDirectory,
-            `${entry.id}.js`
+            `${entry.id}.json`
         );
 
         const courseTopicIds = new Set();
@@ -95,13 +77,38 @@ async function loadCourses(topicIds) {
             continue;
         }
 
-        const courseData = await readCourseScript(
-            courseFile,
-            "courseData"
-        );
+        const courseData = await readJSON(courseFile);
 
         for (const chapter of courseData.chapters) {
             for (const page of chapter.pages) {
+                if (page.type === "course-topic") {
+                    const courseTopicFile = path.join(
+                        courseTopicsDirectory,
+                        entry.id,
+                        `${page.id}.md`
+                    );
+
+                    try {
+                        await access(courseTopicFile);
+                    } catch (error) {
+                        if (error.code !== "ENOENT") {
+                            throw error;
+                        }
+
+                        console.warn(
+                            `Course-Topic noch nicht vorhanden: ${entry.id}/${page.id}`
+                        );
+                    }
+
+                    continue;
+                }
+
+                if (page.type !== "topic") {
+                    throw new Error(
+                        `Ungültiger Seitentyp im Kurs ${entry.id}: ${page.type}`
+                    );
+                }
+
                 if (!topicIds.has(page.id)) {
                     console.warn(
                         `Unbekanntes Topic im Kurs ${entry.id}: ${page.id}`
@@ -156,7 +163,6 @@ async function generateGraph() {
         for (const link of extractWikiLinks(content)) {
             const target = link.topicId;
 
-            // Nur Verbindungen zwischen existierenden Topics
             if (!topicIds.has(target)) {
                 console.warn(
                     `Unbekanntes Topic: ${source} → ${target}`
@@ -164,12 +170,10 @@ async function generateGraph() {
                 continue;
             }
 
-            // Keine Selbstverbindungen
             if (source === target) {
                 continue;
             }
 
-            // Ungerichtete Kanten eindeutig identifizieren
             const [a, b] = [source, target].sort();
             const edgeKey = JSON.stringify([a, b]);
 
@@ -192,7 +196,6 @@ async function generateGraph() {
             a.target.localeCompare(b.target)
     );
 
-    // Kurszugehörigkeiten aus den bestehenden Kursdateien ableiten
     const courses = await loadCourses(topicIds);
 
     const graph = {
@@ -200,6 +203,8 @@ async function generateGraph() {
         edges,
         courses
     };
+
+    await mkdir(path.dirname(outputFile), { recursive: true });
 
     await writeFile(
         outputFile,

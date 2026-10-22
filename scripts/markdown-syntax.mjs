@@ -3,7 +3,6 @@ export const WIKI_LINK_PATTERN = /\[\[([^|\]]+)(?:\|([^\]]+))?\]\]/g;
 export function parseInlineSegments(text) {
     const segments = [];
     const codePattern = /`([^`]+)`/g;
-
     let lastIndex = 0;
 
     for (const match of text.matchAll(codePattern)) {
@@ -36,9 +35,7 @@ export function extractWikiLinks(text) {
     const links = [];
 
     for (const segment of parseInlineSegments(text)) {
-        if (segment.type !== "text") {
-            continue;
-        }
+        if (segment.type !== "text") continue;
 
         for (const match of segment.value.matchAll(WIKI_LINK_PATTERN)) {
             links.push({
