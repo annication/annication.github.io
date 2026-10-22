@@ -1,161 +1,123 @@
-import {
-    isTopicCompleted,
-    setTopicCompleted
-} from "./components/progress.js";
+import { isTopicCompleted, setTopicCompleted } from "./components/progress.js";
 
 const params = new URLSearchParams(window.location.search);
-
-const topicId = params.get("id");
+const pageId = params.get("id");
 const courseId = params.get("course");
 
-if (!topicId) {
-    throw new Error("Keine Topic-ID angegeben.");
-}
-
+if (!pageId) throw new Error("Keine Topic-ID angegeben.");
 
 async function loadPage() {
-    let coursePosition = null;
+    const password = sessionStorage.getItem("annication-password");
 
-    // Kurskontext laden
-    if (courseId) {
-        await loadCourse(courseId);
-        coursePosition = findTopicInCourse(topicId);
+    if (!password) {
+        window.location.replace("/password.html");
+        return;
     }
 
-    // Topic laden
-    const topicData = await loadTopic(topicId);
+    let coursePosition = null;
 
+    if (courseId) {
+        await loadCourse(courseId);
+        coursePosition = findPageInCourse(pageId);
+
+        if (!coursePosition) {
+            throw new Error(
+                `Topic "${pageId}" ist nicht im Kurs "${courseId}" enthalten.`
+            );
+        }
+    }
+
+    const pageType = coursePosition ? coursePosition.page.type : "topic";
+    if (pageType !== "topic" && pageType !== "course-topic") {
+        throw new Error(`Ungültiger Topic-Typ: ${pageType}`);
+    }
+
+    const pageData = await loadContent(pageId, pageType, courseId);
+    const title = pageData.metadata.title ?? pageData.title;
     const pageTitle = document.querySelector("page-title");
-
     if (pageTitle) {
         const chapter = coursePosition
             ? `${coursePosition.chapterIndex + 1}.${coursePosition.pageIndex + 1}`
             : null;
-
-        pageTitle.render(
-            topicData.title,
-            chapter
-        );
-
-        document.title =
-            `${topicData.title} | annication`;
+        pageTitle.render(title, chapter);
     }
+    document.title = `${title} | annication`;
 
-    // Header aktualisieren
-    const siteHeader = document.querySelector("site-header");
+    document.querySelector("site-header")?.render();
+    const tableOfContents = document.querySelector("table-of-contents");
+    if (tableOfContents) await tableOfContents.render();
 
-    if (siteHeader) {
-        siteHeader.render();
-    }
+    const container = document.getElementById("topic");
+    if (!container) throw new Error('Container mit ID "topic" fehlt.');
+    container.replaceChildren();
 
-    // Inhaltsverzeichnis aktualisieren
-    const tableOfContents =
-        document.querySelector("table-of-contents");
-
-    if (tableOfContents) {
-        await tableOfContents.render();
-    }
-
-    // Markdown-Renderer erstellen
-    const topicContainer = document.getElementById("topic");
-
-    const markdownElement =
-        document.createElement("annication-markdown");
-
-    // Links innerhalb eines Topics bekommen den passenden Kurskontext
-    markdownElement.setTopicUrlResolver(
-        targetTopicId => {
-            let href =
-                `/pages/topic.html?id=${targetTopicId}`;
-
-            if (
-                courseId &&
-                findTopicInCourse(targetTopicId)
-            ) {
-                href += `&course=${courseId}`;
-            }
-
-            return href;
-        }
-    );
-
-    
-    function renderNextTopicButton(container, currentTopicId) {
-        const nextTopic = findNextTopicInCourse(currentTopicId);
-
-        if (!nextTopic) {
-            return;
+    const markdownElement = document.createElement("annication-markdown");
+    const assetBaseUrl = pageType === "topic"
+        ? "/content/topics/"
+        : `/content/course-topics/${encodeURIComponent(courseId)}/`;
+    markdownElement.setPageContext(pageType, assetBaseUrl);
+    // Alle Wiki-Links führen zu globalen Topics.
+    markdownElement.setPageUrlResolver(targetTopicId => {
+        if (!targetTopicId) {
+            throw new Error("Leere Topic-ID in Wiki-Link.");
         }
 
-        const link = document.createElement("a");
-        link.className = "next-topic-button";
+        const targetParams = new URLSearchParams({ id: targetTopicId });
+        if (
+            courseId &&
+            findPageInCourse(targetTopicId)?.page.type === "topic"
+        ) {
+            targetParams.set("course", courseId);
+        }
+        return `/pages/topic.html?${targetParams.toString()}`;
+    });
 
-        const params = new URLSearchParams({
-            id: nextTopic.id,
-            course: courseId
-        });
-
-        link.href = `/pages/topic.html?${params.toString()}`;
-
-        const text = document.createElement("span");
-        text.textContent = "Weiter";
-
-        const arrow = document.createElement("span");
-        arrow.className = "next-topic-arrow";
-        arrow.textContent = "→";
-        arrow.setAttribute("aria-hidden", "true");
-
-        link.appendChild(text);
-        link.appendChild(arrow);
-
-        container.appendChild(link);
-    }
-
-
-    // Topic darstellen
-    topicContainer.appendChild(markdownElement);
-    markdownElement.renderTopic(topicData);
+    container.appendChild(markdownElement);
+    markdownElement.renderTopic(pageData);
 
     const actions = document.createElement("div");
     actions.className = "topic-actions";
+    container.appendChild(actions);
 
-    topicContainer.appendChild(actions);
-
-    renderProgressCheckbox(actions);
-
-    if (coursePosition) {
-        renderNextTopicButton(actions, topicId);
-    }
+    const progressId = pageType === "topic"
+        ? pageId
+        : `course-topic:${courseId}:${pageId}`;
+    renderProgressCheckbox(actions, progressId);
+    if (coursePosition) renderNextPageButton(actions, pageId);
 }
 
+function renderNextPageButton(container, currentPageId) {
+    const nextPage = findNextPageInCourse(currentPageId);
+    if (!nextPage) return;
 
-function renderProgressCheckbox(container) {
-    const label = document.createElement("label");
-    label.className = "topic-progress";
-
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.checked = isTopicCompleted(topicId);
+    const link = document.createElement("a");
+    link.className = "next-topic-button";
+    link.href = `/pages/topic.html?${new URLSearchParams({ id: nextPage.id, course: courseId })}`;
 
     const text = document.createElement("span");
-    text.textContent = "Bei mir hat's Klick gemacht!";
-
-    checkbox.addEventListener("change", () => {
-        const saved = setTopicCompleted(
-            topicId,
-            checkbox.checked
-        );
-
-        if (!saved) {
-            checkbox.checked = isTopicCompleted(topicId);
-        }
-    });
-
-    label.appendChild(checkbox);
-    label.appendChild(text);
-
-    container.appendChild(label);
+    text.textContent = "Weiter";
+    const arrow = document.createElement("span");
+    arrow.className = "next-topic-arrow";
+    arrow.textContent = "→";
+    arrow.setAttribute("aria-hidden", "true");
+    link.append(text, arrow);
+    container.appendChild(link);
 }
 
+function renderProgressCheckbox(container, progressId) {
+    const label = document.createElement("label");
+    label.className = "topic-progress";
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = isTopicCompleted(progressId);
+    const text = document.createElement("span");
+    text.textContent = "Bei mir hat's Klick gemacht!";
+    checkbox.addEventListener("change", () => {
+        const saved = setTopicCompleted(progressId, checkbox.checked);
+        if (!saved) checkbox.checked = isTopicCompleted(progressId);
+    });
+    label.append(checkbox, text);
+    container.appendChild(label);
+}
 
 loadPage();

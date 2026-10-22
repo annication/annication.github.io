@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "Prüfe annication auf unverschlüsselte Inhalte ..."
+
+if git diff --cached --name-only --diff-filter=ACMR -z |
+    grep -zE '^(content/.*\.md|content/graph\.json|courses/.*\.json|courses/index\.js)$' |
+    grep -qz .; then
+
+    echo "FEHLER: Unverschlüsselte Inhaltsdateien im Commit gefunden."
+    echo "Bitte nur verschlüsselte .enc-Dateien veröffentlichen."
+    exit 1
+fi
+
+echo "Sicherheitsprüfung bestanden."

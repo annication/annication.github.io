@@ -4,9 +4,20 @@ import {
 } from "./markdown-syntax.mjs";
 
 class AnnicationMarkdown extends HTMLElement {
-    setTopicUrlResolver(resolver) {
-        this.topicUrlResolver = resolver;
+    
+    setPageUrlResolver(resolver) {
+        this.pageUrlResolver = resolver;
     }
+
+    setPageContext(type, assetBaseUrl) {
+        if (type !== "topic" && type !== "course-topic") {
+            throw new Error(`Ungültiger Seitentyp: ${type}`);
+        }
+
+        this.pageType = type;
+        this.assetBaseUrl = assetBaseUrl;
+    }
+
 
     renderTopic(topic) {
         const content = topic.content;
@@ -468,7 +479,6 @@ class AnnicationMarkdown extends HTMLElement {
         );
 
         // Wikilinks mit optionalem Anzeigenamen
-        // Wikilinks mit optionalem Anzeigenamen
         html = html.replace(
             WIKI_LINK_PATTERN,
             (match, topicId, title) => {
@@ -493,19 +503,25 @@ class AnnicationMarkdown extends HTMLElement {
 
         return html;
     }
+    
+    renderTopicLink(targetId, title) {
+        if (!this.pageUrlResolver) {
+            throw new Error("Kein Page-URL-Resolver gesetzt.");
+        }
 
-    renderTopicLink(topicId, title) {
-        const href = this.topicUrlResolver
-            ? this.topicUrlResolver(topicId)
-            : `/pages/topic.html?id=${encodeURIComponent(topicId)}`;
-
-        return `<a class="topic-link" href="${href}">${title}</a>`;
+        const href = this.pageUrlResolver(targetId);
+        return `<a class="topic-link"
+                href="${this.escapeHtml(href)}">${this.escapeHtml(title)}</a>`;
     }
 
     resolveAssetUrl(path) {
+        if (!this.assetBaseUrl) {
+            throw new Error("Kein Asset-Basisverzeichnis gesetzt.");
+        }
+
         return new URL(
             path,
-            new URL("/content/topics/", window.location.origin)
+            new URL(this.assetBaseUrl, window.location.origin)
         ).href;
     }
 }
