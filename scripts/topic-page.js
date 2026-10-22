@@ -120,4 +120,6 @@ function renderProgressCheckbox(container, progressId) {
     container.appendChild(label);
 }
 
-loadPage();
+document.addEventListener("DOMContentLoaded", () => {
+    loadPage().catch(console.error);
+});
